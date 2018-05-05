@@ -51,9 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebdf8c10c5560124a951d81a0384e785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xAxis: {fileID: 11400000, guid: c7dd3a76bb9897b4eaf109d5ae947b98, type: 2}
-  yAxis: {fileID: 11400000, guid: f7591835e511aea44b61f056a55e8c2c, type: 2}
-  xMouse: {fileID: 11400000, guid: 3414738c174166141bbfeeac98064cb6, type: 2}
-  yMouse: {fileID: 11400000, guid: d950d2e06076db44eab0598c110b9830, type: 2}
   escEvent: {fileID: 11400000, guid: 625b1a4dffbafc44da39b0f11bce74c2, type: 2}
-  fire1Event: {fileID: 11400000, guid: acca1bdfc3d454046841fd727dd9871f, type: 2}
+  player1Horizontal: {fileID: 11400000, guid: 311aacf747c50874891c806df83b8df7, type: 2}
+  player1Vertical: {fileID: 11400000, guid: 1c30254f6685c0f40a4215106a35f3f3, type: 2}
+  player1Fire1Event: {fileID: 11400000, guid: 075d52a27b38c4e4a91c9bedd16a6a5f, type: 2}
+  player2Horizontal: {fileID: 11400000, guid: bf5865dd0734f934fa751d3c837cc946, type: 2}
+  player2Vertical: {fileID: 11400000, guid: 4015f71e15dccc04689a48dc86cd23d5, type: 2}
+  player2Fire1Event: {fileID: 11400000, guid: ca2e31bce2df04447bfec7c1efe8d90a, type: 2}

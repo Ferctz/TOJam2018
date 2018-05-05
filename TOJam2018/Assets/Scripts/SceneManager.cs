@@ -3,8 +3,12 @@ using UnityEngine.SceneManagement;
 
 namespace TOJAM2018.SceneManagement
 {
+    public delegate void SceneLoadedCallback();
+
     public class SceneManager : MonoBehaviour
     {
+        private static SceneLoadedCallback sceneLoadedEvent;
+
         public static bool IsSceneInBuildSettings(string sceneName)
         {
             for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings; i++)
@@ -37,11 +41,16 @@ namespace TOJAM2018.SceneManagement
         /// </summary>
         /// <param name="sceneName"> Scene name </param>
         /// <param name="loadSceneMode"> Scene loading mode </param>
-        public static bool LoadSceneAsync(string sceneName, LoadSceneMode loadSceneMode)
+        public static bool LoadSceneAsync(string sceneName, LoadSceneMode loadSceneMode, System.Action sceneLoadAction = null)
         {
             if (!IsSceneInBuildSettings(sceneName))
             {
                 return false;
+            }
+
+            if (sceneLoadAction != null)
+            {
+                sceneLoadedEvent += (() => sceneLoadAction());
             }
 
             UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
@@ -52,6 +61,12 @@ namespace TOJAM2018.SceneManagement
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             Debug.Log("OnSceneLoaded: " + scene.name + ". Mode: " + mode);
+
+            if (sceneLoadedEvent != null)
+            {
+                sceneLoadedEvent();
+            }
+            sceneLoadedEvent = null;
         }
 
         private void OnDisable()

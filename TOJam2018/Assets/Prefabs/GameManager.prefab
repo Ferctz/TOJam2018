@@ -58,11 +58,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114844780383454750}
-        m_MethodName: 
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -109,3 +109,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d262e23b457a4a41bd8585df98c40f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCount: {fileID: 11400000, guid: 0bb2dc970f0c18944aeb60892c81287b, type: 2}
+  player1: {fileID: 1479382501374688, guid: 709a7560235ffec4abece7669f2c936f, type: 2}
+  player2: {fileID: 1127634201557108, guid: 11df239b119369d40994c7b3af67a390, type: 2}
+  playerCamera: {fileID: 20288420382818964, guid: 9aff8c1c3edc4344b8544305f8d26a9e,
+    type: 2}
+  gameTerrainData: {fileID: 15600000, guid: 2e865b0fbbd4c2745aed9642f8126fe5, type: 2}
+  terrainLayer:
+    serializedVersion: 2
+    m_Bits: 256

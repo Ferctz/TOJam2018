@@ -4,7 +4,14 @@ namespace TOJAM2018.Gameplay
 {
     public class FollowPlayer : MonoBehaviour
     {
-        public Transform followTransform;
+        [SerializeField]
+        private Transform followTransform;
+        public Transform FollowTransform
+        {
+            get { return followTransform; }
+            set { followTransform = value; }
+        }
+
         public Vector3 offset;
 
         private Transform Transform;
@@ -21,6 +28,11 @@ namespace TOJAM2018.Gameplay
             /*calculatedOffset.x = offset.x * followTransform.forward.x;
             calculatedOffset.y = offset.y * followTransform.forward.y;
             calculatedOffset.z = offset.z * followTransform.forward.z;*/
+
+            if (followTransform == null)
+            {
+                return;
+            }
 
             Transform.position = followTransform.position + (offset.x * followTransform.right) +
                                                             (offset.y * followTransform.up) +

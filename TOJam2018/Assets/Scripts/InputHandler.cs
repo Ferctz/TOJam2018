@@ -5,14 +5,18 @@ namespace TOJAM2018.InputHandling
 {
     public class InputHandler : MonoBehaviour
     {
-        public FloatVariable xAxis;
-        public FloatVariable yAxis;
-        public FloatVariable xMouse;
-        public FloatVariable yMouse;
-
         public GameEvent escEvent;
-        public GameEvent fire1Event;
-        
+
+        [Header("Player 1 Input")]
+        public FloatVariable player1Horizontal;
+        public FloatVariable player1Vertical;
+        public GameEvent player1Fire1Event;
+
+        [Header("Player 2 Input")]
+        public FloatVariable player2Horizontal;
+        public FloatVariable player2Vertical;
+        public GameEvent player2Fire1Event;
+
         private void Awake()
         {
             DontDestroyOnLoad(this);
@@ -20,20 +24,27 @@ namespace TOJAM2018.InputHandling
 
         private void Update()
         {
-            xAxis.Value = Input.GetAxis("Horizontal");
-            yAxis.Value = Input.GetAxis("Vertical");
-            xMouse.Value = Input.GetAxis("Mouse X");
-            yMouse.Value = Input.GetAxis("Mouse Y");
-
-            if (Input.GetButtonDown("Fire1"))
-            {
-                fire1Event.Raise();
-            }
-
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 escEvent.Raise();
             }
+
+            #region PlayerOneInput
+            player1Horizontal.Value = Input.GetAxis("Horizontal");
+            player1Vertical.Value = Input.GetAxis("Vertical");
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                player1Fire1Event.Raise();
+            }
+            
+            #endregion
+
+            #region PlayerTwoInput
+
+
+
+            #endregion
         }
     }
 }
