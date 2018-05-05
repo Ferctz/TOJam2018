@@ -55,4 +55,5 @@ MonoBehaviour:
   yAxis: {fileID: 11400000, guid: f7591835e511aea44b61f056a55e8c2c, type: 2}
   xMouse: {fileID: 11400000, guid: 3414738c174166141bbfeeac98064cb6, type: 2}
   yMouse: {fileID: 11400000, guid: d950d2e06076db44eab0598c110b9830, type: 2}
+  escEvent: {fileID: 11400000, guid: 625b1a4dffbafc44da39b0f11bce74c2, type: 2}
   fire1Event: {fileID: 11400000, guid: acca1bdfc3d454046841fd727dd9871f, type: 2}

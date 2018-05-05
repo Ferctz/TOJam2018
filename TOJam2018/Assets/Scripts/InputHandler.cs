@@ -10,8 +10,9 @@ namespace TOJAM2018.InputHandling
         public FloatVariable xMouse;
         public FloatVariable yMouse;
 
+        public GameEvent escEvent;
         public GameEvent fire1Event;
-
+        
         private void Awake()
         {
             DontDestroyOnLoad(this);
@@ -27,6 +28,11 @@ namespace TOJAM2018.InputHandling
             if (Input.GetButtonDown("Fire1"))
             {
                 fire1Event.Raise();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                escEvent.Raise();
             }
         }
     }
