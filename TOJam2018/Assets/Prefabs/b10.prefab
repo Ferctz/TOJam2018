@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1811961336308888}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 373.26114, y: 79.03314, z: 260.30963}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 4505581675200856}
@@ -118,9 +118,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 6d6a601722753d441bce009df7213a6b, type: 3}
-  - {fileID: 2100002, guid: 6d6a601722753d441bce009df7213a6b, type: 3}
-  - {fileID: 2100004, guid: 6d6a601722753d441bce009df7213a6b, type: 3}
+  - {fileID: 2100000, guid: 59a86af63800d864daa70ab90a3dc80c, type: 2}
+  - {fileID: 2100000, guid: 82e4dc237080ba14b854c6d88ca26ae8, type: 2}
+  - {fileID: 2100000, guid: cb1813432d67217438c93436eb503c48, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -197,5 +197,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae638b8ebb22bf4a98791223d3adf70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shatterPrefab: {fileID: 1259328579208430, guid: 2a913e4a3b0866a4e9b9eb2bb1a21744,
+  shatterPrefab: {fileID: 1232548467291890, guid: 4991e658f47c0ec49a852c5bad43e0b4,
     type: 2}

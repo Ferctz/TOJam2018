@@ -28,12 +28,18 @@ namespace TOJAM2018.Gameplay
 
         public void Fire()
         {
+            bulletRigidbody.velocity = Vector3.zero;
+            bulletRigidbody.angularVelocity = Vector3.zero;
+
             bulletRigidbody.isKinematic = false;
             bulletMesh.enabled = true;
         }
 
         public void Sleep()
         {
+            bulletRigidbody.velocity = Vector3.zero;
+            bulletRigidbody.angularVelocity = Vector3.zero;
+
             bulletRigidbody.isKinematic = true;
             bulletMesh.enabled = false;
         }

@@ -33,16 +33,24 @@ namespace TOJAM2018.InputHandling
             player1Horizontal.Value = Input.GetAxis("Horizontal");
             player1Vertical.Value = Input.GetAxis("Vertical");
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) ||
+                Input.GetButtonDown("Fire1"))
             {
                 player1Fire1Event.Raise();
             }
-            
+
             #endregion
 
             #region PlayerTwoInput
 
+            player2Horizontal.Value = Input.GetAxis("Horizontal");
+            player2Vertical.Value = Input.GetAxis("Vertical");
 
+            if (Input.GetKeyDown(KeyCode.RightShift) ||
+                Input.GetButtonDown("Fire1"))
+            {
+                player2Fire1Event.Raise();
+            }
 
             #endregion
         }
