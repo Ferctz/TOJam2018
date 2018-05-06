@@ -11,6 +11,8 @@ namespace TOJAM2018.Gameplay
         public FloatVariable horizontal;
         public FloatVariable vertical;
 
+        public BoolVariable invertY;
+
         public FloatVariable forwardForce;
         public FloatVariable torqueForce;
 
@@ -29,11 +31,16 @@ namespace TOJAM2018.Gameplay
         private void FixedUpdate()
         {
             playerRigidbody.AddForce(playerTransform.forward * forwardForce.Value);
-            torque.x = 0f + (-vertical.Value);
+            torque.x = 0f + (invertY.Value ? vertical.Value : -vertical.Value);
             torque.y = 0f + horizontal.Value;
             playerRigidbody.AddRelativeTorque(torque * torqueForce.Value);
 
             rigidbodyVelocityMagnitude = playerRigidbody.velocity.magnitude;
+        }
+
+        public void ToggleInvertY()
+        {
+            invertY.Value = !invertY.Value;
         }
     }
 }

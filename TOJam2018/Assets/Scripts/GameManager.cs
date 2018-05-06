@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using ScriptableObjects;
 using Random = System.Random;
+using TOJAM2018.HUD;
 
 namespace TOJAM2018.Gameplay
 {
@@ -12,6 +13,9 @@ namespace TOJAM2018.Gameplay
         public GameObject player2;
 
         public Camera playerCamera;
+
+        public PlayerCanvas player1HUDCanvas;
+        public PlayerCanvas player2HUDCanvas;
 
         public TerrainData gameTerrainData;
 
@@ -47,6 +51,9 @@ namespace TOJAM2018.Gameplay
             FollowPlayer player1CameraFollow = player1Camera.GetComponent<FollowPlayer>();
             player1CameraFollow.FollowTransform = player1Clone.transform;
 
+            PlayerCanvas player1Canvas = Instantiate(player1HUDCanvas);
+            player1Canvas.Canvas.worldCamera = player1Camera;
+
             player1Clone.transform.position = new Vector3(Mathf.Lerp(gameTerrainData.bounds.min.x, gameTerrainData.bounds.max.x, (float)rand.NextDouble()),
                                                             0f,
                                                             Mathf.Lerp(gameTerrainData.bounds.min.z, gameTerrainData.bounds.max.z, (float)rand.NextDouble()));
@@ -65,6 +72,9 @@ namespace TOJAM2018.Gameplay
                 Camera player2Camera = Instantiate(playerCamera);
                 FollowPlayer player2CameraFollow = player2Camera.GetComponent<FollowPlayer>();
                 player2CameraFollow.FollowTransform = player2Clone.transform;
+
+                PlayerCanvas player2Canvas = Instantiate(player2HUDCanvas);
+                player2Canvas.Canvas.worldCamera = player2Camera;
 
                 player2Camera.rect = new Rect(Vector2.zero, new Vector2(1f, 0.5f));
 

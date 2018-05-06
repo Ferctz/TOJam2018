@@ -11,6 +11,7 @@ namespace TOJAM2018.Gameplay
         public Rigidbody bulletRigidbody;
         public MeshRenderer bulletMesh;
         public FloatVariable bulletForce;
+        public FloatVariable bulletImpulseForce;
 
         private Transform Transform;
 
@@ -33,6 +34,8 @@ namespace TOJAM2018.Gameplay
 
             bulletRigidbody.isKinematic = false;
             bulletMesh.enabled = true;
+
+            bulletRigidbody.AddForce(Transform.forward * bulletImpulseForce.Value, ForceMode.Impulse);
         }
 
         public void Sleep()

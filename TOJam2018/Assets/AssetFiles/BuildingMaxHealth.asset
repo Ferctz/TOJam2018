@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38368e6c87902e4f8e2366a9d117156, type: 3}
   m_Name: BuildingMaxHealth
   m_EditorClassIdentifier: 
-  Value: 0
+  Value: 5

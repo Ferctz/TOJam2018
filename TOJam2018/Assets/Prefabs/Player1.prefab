@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114953235425465904}
   - component: {fileID: 114691989108759018}
   - component: {fileID: 114185594297407938}
+  - component: {fileID: 114177494354952868}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -132,6 +133,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114177494354952868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1479382501374688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df13a762d91aa047ac53e9f8ddde719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 189823d0f7b65f248aa015f94a493eab, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114953235425465904}
+        m_MethodName: ToggleInvertY
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114185594297407938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,6 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontal: {fileID: 11400000, guid: 311aacf747c50874891c806df83b8df7, type: 2}
   vertical: {fileID: 11400000, guid: 1c30254f6685c0f40a4215106a35f3f3, type: 2}
+  invertY: {fileID: 11400000, guid: 1e343e0260b512e40aeb7da5f056a266, type: 2}
   forwardForce: {fileID: 11400000, guid: 5868a374555329649be5a88022f686e8, type: 2}
   torqueForce: {fileID: 11400000, guid: 3c73c77d8210e544a8524b7b4a4b6e1d, type: 2}
   playerRigidbody: {fileID: 54767595693282168}
@@ -201,4 +231,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49869e2fbbf7d7345bc1867af4adc66e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRuntimeSet: {fileID: 11400000, guid: 843d090ee9b93df42b3150c040e78036, type: 2}
   playerNumber: 1

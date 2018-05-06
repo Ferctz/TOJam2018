@@ -7,7 +7,8 @@ namespace TOJAM2018.Gameplay
 
     public class ShatterOnCollision : MonoBehaviour
     {
-        private Transform Transform;
+        private Transform buildingTransform;
+        public Transform BuildingTransform { get { return buildingTransform ?? (buildingTransform = transform); } }
 
         public ShatterableRuntimeSet shatterableRuntimeSet;
 
@@ -21,8 +22,6 @@ namespace TOJAM2018.Gameplay
 
         private void Awake()
         {
-            Transform = transform;
-
             hits = hitsUntilShatter.Value;
 
             bulletLayer = LayerMask.NameToLayer("Bullet");
@@ -58,7 +57,7 @@ namespace TOJAM2018.Gameplay
 
         private void Shatter()
         {
-            GameObject.Instantiate(shatterPrefab, Transform.position, Transform.rotation);
+            GameObject.Instantiate(shatterPrefab, BuildingTransform.position, BuildingTransform.rotation);
 
             if (buildingDestroyedEvent != null)
             {

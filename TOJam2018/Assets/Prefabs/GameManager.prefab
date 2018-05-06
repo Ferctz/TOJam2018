@@ -114,6 +114,10 @@ MonoBehaviour:
   player2: {fileID: 1127634201557108, guid: 11df239b119369d40994c7b3af67a390, type: 2}
   playerCamera: {fileID: 20288420382818964, guid: 9aff8c1c3edc4344b8544305f8d26a9e,
     type: 2}
+  player1HUDCanvas: {fileID: 114042627173730388, guid: a576a9046e56adc41a19fc4d642f50b3,
+    type: 2}
+  player2HUDCanvas: {fileID: 114042627173730388, guid: b2abbc31bcd0ee74f8f810efe682a194,
+    type: 2}
   gameTerrainData: {fileID: 15600000, guid: 2e865b0fbbd4c2745aed9642f8126fe5, type: 2}
   terrainLayer:
     serializedVersion: 2
