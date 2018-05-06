@@ -6,6 +6,7 @@ namespace TOJAM2018.Gameplay
     public class FireBullet : MonoBehaviour
     {
         private Transform Transform;
+        private Transform dynamicTransform;
 
         public ShipBullet bulletPrefab;
 
@@ -15,6 +16,7 @@ namespace TOJAM2018.Gameplay
         private void Awake()
         {
             Transform = transform;
+            dynamicTransform = GameObject.Find("Dynamic").transform;
             InitQueue();
         }
 
@@ -23,7 +25,7 @@ namespace TOJAM2018.Gameplay
             bulletQueue = new Queue<ShipBullet>();
             for (int i = 0; i < INITIAL_BULLET_POOL; i++)
             {
-                ShipBullet pooledBullet = GameObject.Instantiate(bulletPrefab, Transform);
+                ShipBullet pooledBullet = GameObject.Instantiate(bulletPrefab, dynamicTransform.position, Quaternion.identity, dynamicTransform);
                 pooledBullet.Sleep();
                 bulletQueue.Enqueue(pooledBullet);
             }
@@ -37,7 +39,7 @@ namespace TOJAM2018.Gameplay
             }
             else
             {
-                ShipBullet pooledBullet = GameObject.Instantiate(bulletPrefab, Transform);
+                ShipBullet pooledBullet = GameObject.Instantiate(bulletPrefab, dynamicTransform.position, Quaternion.identity);
                 return pooledBullet;
             }
         }
@@ -45,7 +47,7 @@ namespace TOJAM2018.Gameplay
         public void FireShipBullet()
         {
             ShipBullet bullet = GetShipBullet();
-            bullet.transform.position = Transform.position + (Transform.forward * 5f);
+            bullet.transform.position = Transform.position + (Transform.forward * 8f);
             bullet.transform.forward = Transform.forward;
             bullet.bulletCollisionEvent += OnBulletCollision;
             bullet.Fire();

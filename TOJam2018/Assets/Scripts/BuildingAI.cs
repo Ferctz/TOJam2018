@@ -11,7 +11,7 @@ namespace TOJAM2018.Gameplay
         [SerializeField]
         private ShatterOnCollision currentTarget;
 
-        private const float MAXIMUM_BUILDING_DISTANCE = 300f;
+        private const float MAXIMUM_BUILDING_DISTANCE = 500f;
         private bool buildingCloseToPlayers = true;
 
         private void Start()
@@ -36,19 +36,30 @@ namespace TOJAM2018.Gameplay
                 return;
             }
 
-            buildingCloseToPlayers = true;
             for (int i = 0; i < shatterableRuntimeSet.Items.Count; i++)
             {
+                if (currentTarget == shatterableRuntimeSet.Items[i])
+                {
+                    continue;
+                }
+
+                buildingCloseToPlayers = true;
                 for (int j = 0; j < playerRuntimeSet.Items.Count; j++)
                 {
-                    buildingCloseToPlayers &= Vector3.Distance(shatterableRuntimeSet.Items[i].transform.position, playerRuntimeSet.Items[j].PlayerTransform.position) < MAXIMUM_BUILDING_DISTANCE;
+                    buildingCloseToPlayers &= Vector3.Distance(shatterableRuntimeSet.Items[i].BuildingTransform.position, playerRuntimeSet.Items[j].PlayerTransform.position) < MAXIMUM_BUILDING_DISTANCE;
                 }
 
                 if (buildingCloseToPlayers)
                 {
                     currentTarget = shatterableRuntimeSet.Items[i];
 
+                    FlickerMaterial buildingFlickerMaterial = currentTarget.GetComponent<FlickerMaterial>();
+                    buildingFlickerMaterial.StartFlicker();
+
                     currentTarget.buildingDestroyedEvent += SetBuildingTarget;
+
+                    Debug.Log("Building set!");
+                    return;
                 }
             }
         }

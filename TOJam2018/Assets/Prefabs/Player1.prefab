@@ -25,7 +25,8 @@ GameObject:
   - component: {fileID: 114691989108759018}
   - component: {fileID: 114185594297407938}
   - component: {fileID: 114177494354952868}
-  m_Layer: 0
+  - component: {fileID: 136548742001833136}
+  m_Layer: 10
   m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,6 +217,7 @@ MonoBehaviour:
   horizontal: {fileID: 11400000, guid: 311aacf747c50874891c806df83b8df7, type: 2}
   vertical: {fileID: 11400000, guid: 1c30254f6685c0f40a4215106a35f3f3, type: 2}
   invertY: {fileID: 11400000, guid: 1e343e0260b512e40aeb7da5f056a266, type: 2}
+  boost: {fileID: 11400000, guid: fb291fb6ee3a0f246a41a97ae44d4ed6, type: 2}
   forwardForce: {fileID: 11400000, guid: 5868a374555329649be5a88022f686e8, type: 2}
   torqueForce: {fileID: 11400000, guid: 3c73c77d8210e544a8524b7b4a4b6e1d, type: 2}
   playerRigidbody: {fileID: 54767595693282168}
@@ -233,3 +235,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRuntimeSet: {fileID: 11400000, guid: 843d090ee9b93df42b3150c040e78036, type: 2}
   playerNumber: 1
+--- !u!136 &136548742001833136
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1479382501374688}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.7
+  m_Height: 4.4
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}

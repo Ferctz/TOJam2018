@@ -13,12 +13,17 @@ namespace TOJAM2018.Gameplay
 
         public BoolVariable invertY;
 
+        public BoolVariable boost;
+
         public FloatVariable forwardForce;
         public FloatVariable torqueForce;
 
         private Vector3 torque = Vector3.zero;
 
         public Rigidbody playerRigidbody;
+
+        private float thrustMultiplier = 1f;
+        private bool cooldown = false;
 
         [SerializeField]
         private float rigidbodyVelocityMagnitude;
@@ -28,9 +33,36 @@ namespace TOJAM2018.Gameplay
             playerTransform = transform;
         }
 
+        private void Update()
+        {
+            if (!cooldown && boost.Value)
+            {
+                thrustMultiplier += Time.deltaTime * 10f;
+                Mathf.Clamp(thrustMultiplier, 1f, 5f);
+
+                if (thrustMultiplier > 25f)
+                {
+                    if (!cooldown)
+                    {
+                        cooldown = true;
+                    }
+                }
+            }
+
+            if (cooldown)
+            {
+                thrustMultiplier -= Time.deltaTime * 20f;
+                if (thrustMultiplier <= 1f)
+                {
+                    thrustMultiplier = 1f;
+                    cooldown = false;
+                }
+            }
+        }
+
         private void FixedUpdate()
         {
-            playerRigidbody.AddForce(playerTransform.forward * forwardForce.Value);
+            playerRigidbody.AddForce(playerTransform.forward * (forwardForce.Value * thrustMultiplier));
             torque.x = 0f + (invertY.Value ? vertical.Value : -vertical.Value);
             torque.y = 0f + horizontal.Value;
             playerRigidbody.AddRelativeTorque(torque * torqueForce.Value);

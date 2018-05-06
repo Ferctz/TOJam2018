@@ -25,7 +25,8 @@ GameObject:
   - component: {fileID: 114421880046363734}
   - component: {fileID: 114522121179158546}
   - component: {fileID: 114690032959739950}
-  m_Layer: 0
+  - component: {fileID: 136943617841708194}
+  m_Layer: 10
   m_Name: Player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,6 +202,7 @@ MonoBehaviour:
   horizontal: {fileID: 11400000, guid: bf5865dd0734f934fa751d3c837cc946, type: 2}
   vertical: {fileID: 11400000, guid: 4015f71e15dccc04689a48dc86cd23d5, type: 2}
   invertY: {fileID: 11400000, guid: c71403d2ed29564428f80d2b8c393468, type: 2}
+  boost: {fileID: 11400000, guid: 83e0c144a64332e43b10af82f077c4b9, type: 2}
   forwardForce: {fileID: 11400000, guid: 5868a374555329649be5a88022f686e8, type: 2}
   torqueForce: {fileID: 11400000, guid: 3c73c77d8210e544a8524b7b4a4b6e1d, type: 2}
   playerRigidbody: {fileID: 54388255355909524}
@@ -233,3 +235,16 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!136 &136943617841708194
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1127634201557108}
+  m_Material: {fileID: 13400000, guid: 668dcdd830a54ca48b9dcefc5f23cb95, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.7
+  m_Height: 4.6
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.4}

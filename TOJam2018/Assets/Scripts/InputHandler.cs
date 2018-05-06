@@ -7,16 +7,21 @@ namespace TOJAM2018.InputHandling
     {
         public GameEvent escEvent;
 
+        public IntVariable playerCount;
+        public GameEvent gameStartEvent;
+
         [Header("Player 1 Input")]
         public FloatVariable player1Horizontal;
         public FloatVariable player1Vertical;
         public GameEvent player1Fire1Event;
+        public BoolVariable player1Boost;
         public GameEvent player1InvertYEvent;
 
         [Header("Player 2 Input")]
         public FloatVariable player2Horizontal;
         public FloatVariable player2Vertical;
         public GameEvent player2Fire1Event;
+        public BoolVariable player2Boost;
         public GameEvent player2InvertYEvent;
 
         private void Awake()
@@ -29,6 +34,18 @@ namespace TOJAM2018.InputHandling
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 escEvent.Raise();
+            }
+
+            if (Input.GetKeyDown("joystick button 7")) // start button
+            {
+                playerCount.Value = 1;
+                gameStartEvent.Raise();
+            }
+
+            if (Input.GetKeyDown("joystick button 6")) // select button
+            {
+                playerCount.Value = 2;
+                gameStartEvent.Raise();
             }
 
             #region PlayerOneInput
@@ -47,6 +64,8 @@ namespace TOJAM2018.InputHandling
                 player1InvertYEvent.Raise();
             }
 
+            player1Boost.Value = Input.GetKey("joystick 1 button 5");
+
             #endregion
 
             #region PlayerTwoInput
@@ -64,6 +83,8 @@ namespace TOJAM2018.InputHandling
             {
                 player2InvertYEvent.Raise();
             }
+
+            player2Boost.Value = Input.GetKey("joystick 2 button 5");
 
             #endregion
         }

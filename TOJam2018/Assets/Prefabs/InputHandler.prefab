@@ -52,14 +52,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   escEvent: {fileID: 11400000, guid: 625b1a4dffbafc44da39b0f11bce74c2, type: 2}
+  playerCount: {fileID: 11400000, guid: 0bb2dc970f0c18944aeb60892c81287b, type: 2}
+  gameStartEvent: {fileID: 11400000, guid: e3b288aa70254294a93e0e65e0e6a1a4, type: 2}
   player1Horizontal: {fileID: 11400000, guid: 311aacf747c50874891c806df83b8df7, type: 2}
-  player1HorizontalDebug: 0
   player1Vertical: {fileID: 11400000, guid: 1c30254f6685c0f40a4215106a35f3f3, type: 2}
   player1Fire1Event: {fileID: 11400000, guid: 075d52a27b38c4e4a91c9bedd16a6a5f, type: 2}
+  player1Boost: {fileID: 11400000, guid: fb291fb6ee3a0f246a41a97ae44d4ed6, type: 2}
   player1InvertYEvent: {fileID: 11400000, guid: 189823d0f7b65f248aa015f94a493eab,
     type: 2}
   player2Horizontal: {fileID: 11400000, guid: bf5865dd0734f934fa751d3c837cc946, type: 2}
   player2Vertical: {fileID: 11400000, guid: 4015f71e15dccc04689a48dc86cd23d5, type: 2}
   player2Fire1Event: {fileID: 11400000, guid: ca2e31bce2df04447bfec7c1efe8d90a, type: 2}
+  player2Boost: {fileID: 11400000, guid: 83e0c144a64332e43b10af82f077c4b9, type: 2}
   player2InvertYEvent: {fileID: 11400000, guid: dcf16cc1a904c1446bbf24a31bf470ca,
     type: 2}
