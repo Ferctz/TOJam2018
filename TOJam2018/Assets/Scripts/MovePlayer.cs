@@ -18,6 +18,8 @@ namespace TOJAM2018.Gameplay
         public FloatVariable forwardForce;
         public FloatVariable torqueForce;
 
+        public FloatVariable correctiveTorque;
+
         private Vector3 torque = Vector3.zero;
 
         public Rigidbody playerRigidbody;
@@ -66,6 +68,10 @@ namespace TOJAM2018.Gameplay
             torque.x = 0f + (invertY.Value ? vertical.Value : -vertical.Value);
             torque.y = 0f + horizontal.Value;
             playerRigidbody.AddRelativeTorque(torque * torqueForce.Value);
+
+
+            Quaternion softRot = Quaternion.FromToRotation(playerTransform.up, Vector3.up);
+            playerRigidbody.AddTorque(new Vector3(softRot.x, softRot.y, softRot.z) * correctiveTorque.Value);
 
             rigidbodyVelocityMagnitude = playerRigidbody.velocity.magnitude;
         }

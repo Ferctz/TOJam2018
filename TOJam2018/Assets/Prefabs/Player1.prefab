@@ -220,6 +220,7 @@ MonoBehaviour:
   boost: {fileID: 11400000, guid: fb291fb6ee3a0f246a41a97ae44d4ed6, type: 2}
   forwardForce: {fileID: 11400000, guid: 5868a374555329649be5a88022f686e8, type: 2}
   torqueForce: {fileID: 11400000, guid: 3c73c77d8210e544a8524b7b4a4b6e1d, type: 2}
+  correctiveTorque: {fileID: 11400000, guid: afd23d0e96c7d7d4a81c806944601aad, type: 2}
   playerRigidbody: {fileID: 54767595693282168}
   rigidbodyVelocityMagnitude: 0
 --- !u!114 &114955866172714726
