@@ -9,6 +9,8 @@ namespace TOJAM2018.Gameplay
     {
         private Transform Transform;
 
+        public ShatterableRuntimeSet shatterableRuntimeSet;
+
         public GameObject shatterPrefab;
         public BuildingDestroyedCallback buildingDestroyedEvent;
 
@@ -24,6 +26,22 @@ namespace TOJAM2018.Gameplay
             hits = hitsUntilShatter.Value;
 
             bulletLayer = LayerMask.NameToLayer("Bullet");
+        }
+
+        private void OnEnable()
+        {
+            if (shatterableRuntimeSet != null)
+            {
+                shatterableRuntimeSet.Items.Add(this);
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (shatterableRuntimeSet != null)
+            {
+                shatterableRuntimeSet.Items.Remove(this);
+            }
         }
 
         private void OnCollisionEnter(Collision collision)

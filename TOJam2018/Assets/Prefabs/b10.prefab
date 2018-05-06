@@ -197,5 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae638b8ebb22bf4a98791223d3adf70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shatterableRuntimeSet: {fileID: 11400000, guid: 23778c4ba15c0924a82c52688da8745f,
+    type: 2}
   shatterPrefab: {fileID: 1232548467291890, guid: 4991e658f47c0ec49a852c5bad43e0b4,
     type: 2}
+  hitsUntilShatter: {fileID: 0}
