@@ -20,12 +20,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4151824310476288}
   - component: {fileID: 54388255355909524}
+  - component: {fileID: 136943617841708194}
   - component: {fileID: 114025051809763032}
   - component: {fileID: 114631434185562254}
+  - component: {fileID: 114507891538862472}
   - component: {fileID: 114421880046363734}
   - component: {fileID: 114522121179158546}
   - component: {fileID: 114690032959739950}
-  - component: {fileID: 136943617841708194}
   m_Layer: 10
   m_Name: Player2
   m_TagString: Untagged
@@ -146,7 +147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRuntimeSet: {fileID: 11400000, guid: 843d090ee9b93df42b3150c040e78036, type: 2}
-  playerNumber: 2
 --- !u!114 &114421880046363734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,6 +160,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 114409433556396438, guid: ee70a8db878355243a908e31017c7fcf,
     type: 2}
+--- !u!114 &114507891538862472
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1127634201557108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc24a2d8f0295044a4148cd868af6c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerCost: {fileID: 11400000, guid: 404b8edf4c400c643a814278798b7665, type: 2}
+  playerPower: {fileID: 11400000, guid: 050ad5abad807a443891bce251a8670f, type: 2}
+  playerMaxPower: {fileID: 11400000, guid: 9d2dedaa230070141bc7c9837a356e54, type: 2}
+  playerDeathEvent: {fileID: 11400000, guid: 49632756b2a7c884e9ef2948bfe03304, type: 2}
 --- !u!114 &114522121179158546
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,7 +222,6 @@ MonoBehaviour:
   torqueForce: {fileID: 11400000, guid: 3c73c77d8210e544a8524b7b4a4b6e1d, type: 2}
   correctiveTorque: {fileID: 11400000, guid: afd23d0e96c7d7d4a81c806944601aad, type: 2}
   playerRigidbody: {fileID: 54388255355909524}
-  rigidbodyVelocityMagnitude: 0
 --- !u!114 &114690032959739950
 MonoBehaviour:
   m_ObjectHideFlags: 1

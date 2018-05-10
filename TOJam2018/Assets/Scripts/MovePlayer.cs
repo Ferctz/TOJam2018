@@ -27,9 +27,6 @@ namespace TOJAM2018.Gameplay
         private float thrustMultiplier = 1f;
         private bool cooldown = false;
 
-        [SerializeField]
-        private float rigidbodyVelocityMagnitude;
-
         private void Awake()
         {
             playerTransform = transform;
@@ -69,11 +66,8 @@ namespace TOJAM2018.Gameplay
             torque.y = 0f + horizontal.Value;
             playerRigidbody.AddRelativeTorque(torque * torqueForce.Value);
 
-
             Quaternion softRot = Quaternion.FromToRotation(playerTransform.up, Vector3.up);
             playerRigidbody.AddTorque(new Vector3(softRot.x, softRot.y, softRot.z) * correctiveTorque.Value);
-
-            rigidbodyVelocityMagnitude = playerRigidbody.velocity.magnitude;
         }
 
         public void ToggleInvertY()

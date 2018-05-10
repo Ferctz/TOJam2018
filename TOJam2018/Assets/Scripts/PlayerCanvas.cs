@@ -10,17 +10,17 @@ namespace TOJAM2018.HUD
         private Canvas canvas;
         public Canvas Canvas { get { return canvas ?? (canvas = GetComponent<Canvas>()); } }
 
-        public Toggle invertYToggle;
-        public BoolVariable invertY;
+        public SliderPowerTracker sliderPowerTracker;
 
-        private void Awake()
+        public void Init(Camera playerCamera, FloatVariable currentPower, FloatVariable maxPower)
         {
-            invertYToggle.isOn = invertY.Value;
+            Canvas.worldCamera = playerCamera;
+            sliderPowerTracker.Init(currentPower, maxPower);
         }
 
-        public void ToggleInvertY()
+        private void Update()
         {
-            invertYToggle.isOn = !invertYToggle.isOn;
+
         }
     }
 }

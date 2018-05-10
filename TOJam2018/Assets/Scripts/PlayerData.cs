@@ -5,7 +5,6 @@ namespace TOJAM2018.Gameplay
     public class PlayerData : MonoBehaviour
     {
         public PlayerRuntimeSet playerRuntimeSet;
-        public int playerNumber;
 
         private Transform playerTransform;
         public Transform PlayerTransform { get { return playerTransform ?? (playerTransform = transform); } }

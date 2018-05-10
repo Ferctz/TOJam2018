@@ -20,12 +20,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4615585960463548}
   - component: {fileID: 54767595693282168}
+  - component: {fileID: 136548742001833136}
   - component: {fileID: 114955866172714726}
   - component: {fileID: 114953235425465904}
+  - component: {fileID: 114384893242888306}
   - component: {fileID: 114691989108759018}
   - component: {fileID: 114185594297407938}
   - component: {fileID: 114177494354952868}
-  - component: {fileID: 136548742001833136}
   m_Layer: 10
   m_Name: Player1
   m_TagString: Untagged
@@ -190,6 +191,21 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114384893242888306
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1479382501374688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc24a2d8f0295044a4148cd868af6c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerCost: {fileID: 11400000, guid: 404b8edf4c400c643a814278798b7665, type: 2}
+  playerPower: {fileID: 11400000, guid: 1938efcd91cfc9147ab91d35cc50dd92, type: 2}
+  playerMaxPower: {fileID: 11400000, guid: 9d2dedaa230070141bc7c9837a356e54, type: 2}
+  playerDeathEvent: {fileID: 11400000, guid: ecf811622b4ed7e4ea16e48b6d85de65, type: 2}
 --- !u!114 &114691989108759018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -222,7 +238,6 @@ MonoBehaviour:
   torqueForce: {fileID: 11400000, guid: 3c73c77d8210e544a8524b7b4a4b6e1d, type: 2}
   correctiveTorque: {fileID: 11400000, guid: afd23d0e96c7d7d4a81c806944601aad, type: 2}
   playerRigidbody: {fileID: 54767595693282168}
-  rigidbodyVelocityMagnitude: 0
 --- !u!114 &114955866172714726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -235,7 +250,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRuntimeSet: {fileID: 11400000, guid: 843d090ee9b93df42b3150c040e78036, type: 2}
-  playerNumber: 1
 --- !u!136 &136548742001833136
 CapsuleCollider:
   m_ObjectHideFlags: 1
