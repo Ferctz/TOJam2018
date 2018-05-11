@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
+using ScriptableObjects;
+using Random = System.Random;
 
 namespace TOJAM2018.Gameplay
 {
@@ -10,9 +12,19 @@ namespace TOJAM2018.Gameplay
 
         [SerializeField]
         private ShatterOnCollision currentTarget;
+        private int targetIndex = -1;
+
+        public GameEvent gameEndEvent;
 
         private const float MAXIMUM_BUILDING_DISTANCE = 500f;
         private bool buildingCloseToPlayers = true;
+
+        private Random rand;
+
+        private void Awake()
+        {
+            rand = new Random((int)System.DateTime.Now.Ticks);
+        }
 
         private void Start()
         {
@@ -26,16 +38,16 @@ namespace TOJAM2018.Gameplay
         }
 
         /// <summary>
-        /// Sets a new target for players to destroy, making sure it is at least MAXIMUM_BUILDING_DISTANCE away from both players
+        /// Sets a new target for players to destroy, favouring those MAXIMUM_BUILDING_DISTANCE away from both players
         /// </summary>
         private void SetBuildingTarget()
         {
-            if (shatterableRuntimeSet == null ||
-                shatterableRuntimeSet.Items.Count == 0)
+            if (shatterableRuntimeSet == null)
             {
                 return;
             }
 
+            targetIndex = -1;
             for (int i = 0; i < shatterableRuntimeSet.Items.Count; i++)
             {
                 if (currentTarget == shatterableRuntimeSet.Items[i])
@@ -51,16 +63,27 @@ namespace TOJAM2018.Gameplay
 
                 if (buildingCloseToPlayers)
                 {
-                    currentTarget = shatterableRuntimeSet.Items[i];
-
-                    FlickerMaterial buildingFlickerMaterial = currentTarget.GetComponent<FlickerMaterial>();
-                    buildingFlickerMaterial.StartFlicker();
-
-                    currentTarget.buildingDestroyedEvent += SetBuildingTarget;
-
-                    Debug.Log("Building set!");
-                    return;
+                    // nearby building found, save its index and stop searching
+                    targetIndex = i;
+                    break;
                 }
+            }
+
+            if (targetIndex >= 0 || shatterableRuntimeSet.Items.Count > 0) // buildings exist but not close to players
+            {
+                currentTarget = targetIndex >= 0 ? shatterableRuntimeSet.Items[targetIndex] : 
+                                                    shatterableRuntimeSet.Items[rand.Next(0, shatterableRuntimeSet.Items.Count)];
+
+                FlickerMaterial buildingFlickerMaterial = currentTarget.GetComponent<FlickerMaterial>();
+                buildingFlickerMaterial.StartFlicker();
+
+                currentTarget.buildingDestroyedEvent += SetBuildingTarget;
+
+                Debug.Log("Building set!");
+            }
+            else // no more buildings left to destroy
+            {
+                gameEndEvent.Raise();
             }
         }
     }

@@ -104,12 +104,23 @@ namespace TOJAM2018.Gameplay
 
                 Rect player2Rect = new Rect(Vector2.zero, new Vector2(1f, 0.5f));
                 player2Camera.rect = player2Rect;
+                player2UICamera.rect = player2Rect;
 
                 // position player 2 +-30m away in x & z from player 1
                 player2Clone.transform.position = player1Clone.transform.position + new Vector3(Mathf.Lerp(-30f, 30f, (float)rand.NextDouble()),
                                                             0f,
                                                             Mathf.Lerp(-30f, 30f, (float)rand.NextDouble()));
             }
+        }
+
+        public void PlayerDeath()
+        {
+
+        }
+
+        public void EndGame()
+        {
+
         }
     }
 }
