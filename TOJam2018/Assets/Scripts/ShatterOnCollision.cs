@@ -3,7 +3,7 @@ using ScriptableObjects;
 
 namespace TOJAM2018.Gameplay
 {
-    public delegate void BuildingDestroyedCallback();
+    public delegate void BuildingDestroyedCallback(ShatterOnCollision building);
 
     public class ShatterOnCollision : MonoBehaviour
     {
@@ -12,17 +12,21 @@ namespace TOJAM2018.Gameplay
 
         public ShatterableRuntimeSet shatterableRuntimeSet;
 
+        public bool IsTargetBuilding { get; set; }
+        public FloatVariable powerGain;
+        public FloatVariable maxPowerGain;
+
         public GameObject shatterPrefab;
         public BuildingDestroyedCallback buildingDestroyedEvent;
 
         public IntVariable hitsUntilShatter;
-        private int hits;
+        private int hits = -1;
 
         private int bulletLayer = 0;
 
         private void Awake()
         {
-            hits = hitsUntilShatter.Value;
+            hits = 0;
 
             bulletLayer = LayerMask.NameToLayer("Bullet");
         }
@@ -47,9 +51,18 @@ namespace TOJAM2018.Gameplay
         {
             if (collision.collider.gameObject.layer == bulletLayer)
             {
-                hits--;
-                if (hits <= 0)
+                hits++;
+                if (hits >= hitsUntilShatter.Value)
                 {
+                    ShipBullet shipBullet = collision.collider.GetComponentInParent<ShipBullet>();
+                    if (shipBullet)
+                    {
+                        if (shipBullet.shatterBuildingEvent != null)
+                        {
+                            shipBullet.shatterBuildingEvent(IsTargetBuilding ? maxPowerGain.Value : powerGain.Value);
+                        }
+                    }
+
                     Shatter();
                 }
             }
@@ -61,7 +74,7 @@ namespace TOJAM2018.Gameplay
 
             if (buildingDestroyedEvent != null)
             {
-                buildingDestroyedEvent();
+                buildingDestroyedEvent(this);
             }
 
             Destroy(gameObject);

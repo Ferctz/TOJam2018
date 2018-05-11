@@ -6,6 +6,8 @@ namespace TOJAM2018.Gameplay
     [RequireComponent(typeof(Rigidbody))]
     public class MovePlayer : MonoBehaviour
     {
+        public BoolVariable isGameRunning;
+
         private Transform playerTransform;
 
         public FloatVariable horizontal;
@@ -34,6 +36,11 @@ namespace TOJAM2018.Gameplay
 
         private void Update()
         {
+            if (!isGameRunning.Value)
+            {
+                return;
+            }
+
             if (!cooldown && boost.Value)
             {
                 thrustMultiplier += Time.deltaTime * 10f;
@@ -61,6 +68,11 @@ namespace TOJAM2018.Gameplay
 
         private void FixedUpdate()
         {
+            if (!isGameRunning.Value)
+            {
+                return;
+            }
+
             playerRigidbody.AddForce(playerTransform.forward * (forwardForce.Value * thrustMultiplier));
             torque.x = 0f + (invertY.Value ? vertical.Value : -vertical.Value);
             torque.y = 0f + horizontal.Value;
@@ -73,6 +85,13 @@ namespace TOJAM2018.Gameplay
         public void ToggleInvertY()
         {
             invertY.Value = !invertY.Value;
+        }
+
+        public void FreezePlayer()
+        {
+            playerRigidbody.isKinematic = true;
+            playerRigidbody.velocity = Vector3.zero;
+            playerRigidbody.angularVelocity = Vector3.zero;
         }
     }
 }

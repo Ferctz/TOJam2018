@@ -16,7 +16,7 @@ namespace TOJAM2018.Gameplay
 
         public GameEvent gameEndEvent;
 
-        private const float MAXIMUM_BUILDING_DISTANCE = 500f;
+        private const float MAXIMUM_BUILDING_DISTANCE = 300f;
         private bool buildingCloseToPlayers = true;
 
         private Random rand;
@@ -28,6 +28,10 @@ namespace TOJAM2018.Gameplay
 
         private void Start()
         {
+            for (int i = 0; i < shatterableRuntimeSet.Items.Count; i++)
+            {
+                shatterableRuntimeSet.Items[i].buildingDestroyedEvent += OnBuildingDestroyed;
+            }
             StartCoroutine(WaitToSetFirstTarget());
         }
 
@@ -69,22 +73,44 @@ namespace TOJAM2018.Gameplay
                 }
             }
 
-            if (targetIndex >= 0 || shatterableRuntimeSet.Items.Count > 0) // buildings exist but not close to players
+            if ((targetIndex >= 0 || shatterableRuntimeSet.Items.Count > 0)) // buildings exist but not close to players
             {
                 currentTarget = targetIndex >= 0 ? shatterableRuntimeSet.Items[targetIndex] : 
                                                     shatterableRuntimeSet.Items[rand.Next(0, shatterableRuntimeSet.Items.Count)];
 
+                currentTarget.IsTargetBuilding = true;
+
                 FlickerMaterial buildingFlickerMaterial = currentTarget.GetComponent<FlickerMaterial>();
                 buildingFlickerMaterial.StartFlicker();
 
-                currentTarget.buildingDestroyedEvent += SetBuildingTarget;
-
                 Debug.Log("Building set!");
             }
-            else // no more buildings left to destroy
+        }
+
+        private void OnBuildingDestroyed(ShatterOnCollision buildingDestroyed)
+        {
+            // remove destroyed building manually from runtime set
+            shatterableRuntimeSet.Items.Remove(buildingDestroyed);
+            if (currentTarget == buildingDestroyed)
             {
-                gameEndEvent.Raise();
+                currentTarget = null;
             }
+            
+            // evaluate game end condition
+            if (shatterableRuntimeSet.Items.Count == 0)
+            {
+                if (gameEndEvent != null)
+                {
+                    gameEndEvent.Raise();
+                    return;
+                }
+            }
+
+            // if buildings remain, find new target
+            if (currentTarget == null)
+            {
+                SetBuildingTarget();
+            }            
         }
     }
 }

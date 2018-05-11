@@ -6,47 +6,37 @@ namespace TOJAM2018.Gameplay
     public class FlickerMaterial : MonoBehaviour
     {
         public MeshRenderer meshRenderer;
-        private Material flickerMaterial;
-
-        private void Awake()
-        {
-            flickerMaterial = meshRenderer.material;
-        }
 
         public void StartFlicker()
         {
-            for (int i = 0; i < meshRenderer.materials.Length; i++)
+            /*for (int i = 0; i < meshRenderer.materials.Length; i++)
             {
                 meshRenderer.materials[i].color = Color.red;
-            }
-            //StartCoroutine(Flicker());
+            }*/
+            StartCoroutine(FlickerRed());
         }
 
-        IEnumerator Flicker()
+        IEnumerator FlickerRed()
         {
-            float timer = 0f;
-            Color initialColor = flickerMaterial.color;
-            Color endColor = new Color(1f, 1f, 1f, flickerMaterial.color.a);
-            float lerpDuration = 1f;
-            bool upLerp = true;
+            Color[] originalColors = new Color[meshRenderer.materials.Length];
+            for (int i = 0; i < meshRenderer.materials.Length; i++)
+            {
+                originalColors[i] = meshRenderer.materials[i].color;
+            }
+
             while (true)
             {
-                if (upLerp)
+                for (int i = 0; i < meshRenderer.materials.Length; i++)
                 {
-                    flickerMaterial.color = Color.Lerp(initialColor, endColor, timer / lerpDuration);
+                    meshRenderer.materials[i].color = Color.red;
                 }
-                else
+                yield return new WaitForSeconds(0.4f);
+                for (int i = 0; i < meshRenderer.materials.Length; i++)
                 {
-                    flickerMaterial.color = Color.Lerp(endColor, initialColor, timer / lerpDuration);
+                    meshRenderer.materials[i].color = originalColors[i];
                 }
-
-                timer += Time.deltaTime;
-                if (timer > lerpDuration)
-                {
-                    timer = 0f;
-                    upLerp = !upLerp;
-                }
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(0.2f);
+                yield return 0;
             }
         }
 

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using ScriptableObjects;
 
 namespace TOJAM2018.HUD
@@ -12,15 +11,19 @@ namespace TOJAM2018.HUD
 
         public SliderPowerTracker sliderPowerTracker;
 
+        public GameObject gameEndText;
+
         public void Init(Camera playerCamera, FloatVariable currentPower, FloatVariable maxPower)
         {
             Canvas.worldCamera = playerCamera;
             sliderPowerTracker.Init(currentPower, maxPower);
+
+            gameEndText.SetActive(false);
         }
 
-        private void Update()
+        public void ShowGameEndScreen()
         {
-
+            gameEndText.SetActive(true);
         }
     }
 }

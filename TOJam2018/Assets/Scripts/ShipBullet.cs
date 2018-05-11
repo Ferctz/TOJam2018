@@ -4,6 +4,7 @@ using ScriptableObjects;
 namespace TOJAM2018.Gameplay
 {
     public delegate void BulletCollisionCallback(ShipBullet shipBullet);
+    public delegate void ShatterBuildingCallback(float powerGained);
 
     [RequireComponent(typeof(Rigidbody))]
     public class ShipBullet : MonoBehaviour
@@ -16,6 +17,7 @@ namespace TOJAM2018.Gameplay
         private Transform Transform;
 
         public BulletCollisionCallback bulletCollisionEvent;
+        public ShatterBuildingCallback shatterBuildingEvent;
 
         private void Awake()
         {

@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114691989108759018}
   - component: {fileID: 114185594297407938}
   - component: {fileID: 114177494354952868}
+  - component: {fileID: 114087328927294710}
   m_Layer: 10
   m_Name: Player1
   m_TagString: Untagged
@@ -135,6 +136,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114087328927294710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1479382501374688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df13a762d91aa047ac53e9f8ddde719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a9c46c1a0408e044e865e61d53b3adad, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114953235425465904}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114177494354952868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -202,10 +231,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc24a2d8f0295044a4148cd868af6c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGameRunning: {fileID: 11400000, guid: e823f385a2636554bb427b7a6f4eeecb, type: 2}
   powerCost: {fileID: 11400000, guid: 404b8edf4c400c643a814278798b7665, type: 2}
   playerPower: {fileID: 11400000, guid: 1938efcd91cfc9147ab91d35cc50dd92, type: 2}
   playerMaxPower: {fileID: 11400000, guid: 9d2dedaa230070141bc7c9837a356e54, type: 2}
-  playerDeathEvent: {fileID: 11400000, guid: ecf811622b4ed7e4ea16e48b6d85de65, type: 2}
+  playerDeathEvent: {fileID: 11400000, guid: a9c46c1a0408e044e865e61d53b3adad, type: 2}
 --- !u!114 &114691989108759018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,8 +247,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1a3a48fb375d6469dc835bdf612227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGameRunning: {fileID: 11400000, guid: e823f385a2636554bb427b7a6f4eeecb, type: 2}
   bulletPrefab: {fileID: 114409433556396438, guid: ee70a8db878355243a908e31017c7fcf,
     type: 2}
+  bulletDestroyBuildingEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114384893242888306}
+        m_MethodName: AddPower
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: TOJAM2018.Gameplay.BulletDestroyBuildingCallback, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &114953235425465904
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -230,6 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a91a519c2b04f54c98820401e3cb50b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGameRunning: {fileID: 11400000, guid: e823f385a2636554bb427b7a6f4eeecb, type: 2}
   horizontal: {fileID: 11400000, guid: 311aacf747c50874891c806df83b8df7, type: 2}
   vertical: {fileID: 11400000, guid: 1c30254f6685c0f40a4215106a35f3f3, type: 2}
   invertY: {fileID: 11400000, guid: 1e343e0260b512e40aeb7da5f056a266, type: 2}

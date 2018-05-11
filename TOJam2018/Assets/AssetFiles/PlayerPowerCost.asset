@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc38c1ebb08a107448e6a9af86dca59d, type: 3}
   m_Name: PlayerPowerCost
   m_EditorClassIdentifier: 
-  Value: 1
+  Value: 1.5

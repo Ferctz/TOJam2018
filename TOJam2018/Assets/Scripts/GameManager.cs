@@ -16,6 +16,7 @@ namespace TOJAM2018.Gameplay
         public FloatVariable player2Power;
 
         [Header("Global")]
+        public BoolVariable isGameRunning;
         public IntVariable playerCount;
         public FloatVariable playerPowerCost;
         public FloatVariable playerMaxPower;
@@ -53,6 +54,9 @@ namespace TOJAM2018.Gameplay
 
         private void OnGameSceneLoaded()
         {
+            // start game
+            isGameRunning.Value = true;
+
             GameObject player1Clone = GameObject.Instantiate(player1);
 
             // spawn player 1 camera
@@ -113,14 +117,9 @@ namespace TOJAM2018.Gameplay
             }
         }
 
-        public void PlayerDeath()
-        {
-
-        }
-
         public void EndGame()
         {
-
+            isGameRunning.Value = false;
         }
     }
 }

@@ -54,3 +54,5 @@ MonoBehaviour:
   playerRuntimeSet: {fileID: 11400000, guid: 843d090ee9b93df42b3150c040e78036, type: 2}
   shatterableRuntimeSet: {fileID: 11400000, guid: 23778c4ba15c0924a82c52688da8745f,
     type: 2}
+  currentTarget: {fileID: 0}
+  gameEndEvent: {fileID: 11400000, guid: a9c46c1a0408e044e865e61d53b3adad, type: 2}

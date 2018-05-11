@@ -5,6 +5,8 @@ namespace TOJAM2018.Gameplay
 {
     public class PowerHandler : MonoBehaviour
     {
+        public BoolVariable isGameRunning;
+
         public FloatVariable powerCost;
         public FloatVariable playerPower;
         public FloatVariable playerMaxPower;
@@ -18,6 +20,11 @@ namespace TOJAM2018.Gameplay
 
         private void Update()
         {
+            if (!isGameRunning.Value)
+            {
+                return;
+            }
+
             playerPower.Value -= Time.deltaTime * powerCost.Value;
 
             if (playerPower.Value <= 0f)
@@ -27,6 +34,12 @@ namespace TOJAM2018.Gameplay
                     playerDeathEvent.Raise();
                 }
             }
+        }
+
+        public void AddPower(float powerToAdd)
+        {
+            playerPower.Value += powerToAdd;
+            playerPower.Value = Mathf.Clamp(playerPower.Value, 0f, playerMaxPower.Value);
         }
     }
 }
