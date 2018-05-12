@@ -50,21 +50,56 @@ namespace TOJAM2018.InputHandling
 
             #region PlayerOneInput
 
-            player1Horizontal.Value = Input.GetAxis("Horizontal1");
-            player1Vertical.Value = Input.GetAxis("Vertical1");
-
-            if (Input.GetKeyDown(KeyCode.Space) ||
-                Input.GetKeyDown("joystick 1 button 0"))
+            if (playerCount.Value == 1)
             {
-                player1Fire1Event.Raise();
+                player1Horizontal.Value = Input.GetAxis("Horizontal");
+                player1Vertical.Value = Input.GetAxis("Vertical");
+            }
+            else
+            {
+                player1Horizontal.Value = Input.GetAxis("Horizontal1");
+                player1Vertical.Value = Input.GetAxis("Vertical1");
             }
 
-            if (Input.GetKeyDown("joystick 1 button 3"))
+            if (playerCount.Value == 1)
             {
-                player1InvertYEvent.Raise();
+                if (Input.GetKeyDown(KeyCode.Space) ||
+                    Input.GetKeyDown("joystick 1 button 0"))
+                {
+                    player1Fire1Event.Raise();
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown("joystick 1 button 0"))
+                {
+                    player1Fire1Event.Raise();
+                }
             }
 
-            player1Boost.Value = Input.GetKey("joystick 1 button 5");
+            if (playerCount.Value == 1)
+            {
+                if (Input.GetKeyDown(KeyCode.Y) || Input.GetKeyDown("joystick 1 button 3"))
+                {
+                    player1InvertYEvent.Raise();
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown("joystick 1 button 3"))
+                {
+                    player1InvertYEvent.Raise();
+                }
+            }
+            
+            if (playerCount.Value == 1)
+            {
+                player1Boost.Value = Input.GetKey(KeyCode.LeftShift) || Input.GetKey("joystick 1 button 5");
+            }
+            else
+            {
+                player1Boost.Value = Input.GetKey("joystick 1 button 5");
+            }            
 
             #endregion
 

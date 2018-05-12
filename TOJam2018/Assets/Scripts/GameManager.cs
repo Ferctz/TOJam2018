@@ -10,10 +10,12 @@ namespace TOJAM2018.Gameplay
         [Header("Player1")]
         public GameObject player1;
         public FloatVariable player1Power;
+        public BoolVariable player1InvertY;
 
         [Header("Player2")]
         public GameObject player2;
         public FloatVariable player2Power;
+        public BoolVariable player2InvertY;
 
         [Header("Global")]
         public BoolVariable isGameRunning;
@@ -70,7 +72,7 @@ namespace TOJAM2018.Gameplay
 
             // init player 1 canvas
             PlayerCanvas player1Canvas = Instantiate(playerHUDCanvas);
-            player1Canvas.Init(player1UICamera, player1Power, playerMaxPower);
+            player1Canvas.Init(player1UICamera, player1Power, playerMaxPower, player1InvertY);
 
             // position player 1 above the terrain
             player1Clone.transform.position = new Vector3(Mathf.Lerp(gameTerrainData.bounds.min.x, gameTerrainData.bounds.max.x, (float)rand.NextDouble()),
@@ -104,7 +106,7 @@ namespace TOJAM2018.Gameplay
 
                 // init player 2 canvas
                 PlayerCanvas player2Canvas = Instantiate(playerHUDCanvas);
-                player2Canvas.Init(player2UICamera, player2Power, playerMaxPower);
+                player2Canvas.Init(player2UICamera, player2Power, playerMaxPower, player2InvertY);
 
                 Rect player2Rect = new Rect(Vector2.zero, new Vector2(1f, 0.5f));
                 player2Camera.rect = player2Rect;

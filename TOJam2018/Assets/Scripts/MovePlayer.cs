@@ -27,7 +27,7 @@ namespace TOJAM2018.Gameplay
         public Rigidbody playerRigidbody;
 
         private float thrustMultiplier = 1f;
-        private bool cooldown = false;
+        private const float MAX_THRUST_MULTIPLIER = 40f;
 
         private void Awake()
         {
@@ -41,29 +41,16 @@ namespace TOJAM2018.Gameplay
                 return;
             }
 
-            if (!cooldown && boost.Value)
+            if (boost.Value)
             {
-                thrustMultiplier += Time.deltaTime * 10f;
-                Mathf.Clamp(thrustMultiplier, 1f, 5f);
-
-                if (thrustMultiplier > 25f)
-                {
-                    if (!cooldown)
-                    {
-                        cooldown = true;
-                    }
-                }
+                thrustMultiplier += Time.deltaTime * 25f;
+            }
+            else
+            {
+                thrustMultiplier -= Time.deltaTime * 40f;
             }
 
-            if (cooldown)
-            {
-                thrustMultiplier -= Time.deltaTime * 20f;
-                if (thrustMultiplier <= 1f)
-                {
-                    thrustMultiplier = 1f;
-                    cooldown = false;
-                }
-            }
+            thrustMultiplier = Mathf.Clamp(thrustMultiplier, 1f, MAX_THRUST_MULTIPLIER);
         }
 
         private void FixedUpdate()
