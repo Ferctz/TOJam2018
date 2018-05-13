@@ -2,6 +2,9 @@
 
 namespace TOJAM2018.Gameplay
 {
+    /// <summary>
+    /// This class should be attached to player instances. Adds this instance to player runtime set.
+    /// </summary>
     public class PlayerData : MonoBehaviour
     {
         public PlayerRuntimeSet playerRuntimeSet;

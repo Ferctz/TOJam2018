@@ -3,8 +3,12 @@ using ScriptableObjects;
 
 namespace TOJAM2018.Gameplay
 {
-    public delegate void BuildingDestroyedCallback(ShatterOnCollision building);
+    public delegate void BuildingDestroyedEventHandler(ShatterOnCollision building);
 
+    /// <summary>
+    /// This class handles spawning a new gameobject once this health reaches critial limit
+    /// Spawns a new gameobject and destroys this one.
+    /// </summary>
     public class ShatterOnCollision : MonoBehaviour
     {
         private Transform buildingTransform;
@@ -17,7 +21,7 @@ namespace TOJAM2018.Gameplay
         public FloatVariable maxPowerGain;
 
         public GameObject shatterPrefab;
-        public BuildingDestroyedCallback buildingDestroyedEvent;
+        public event BuildingDestroyedEventHandler OnBuildingDestroyed;
 
         public IntVariable hitsUntilShatter;
         private int hits = -1;
@@ -47,6 +51,11 @@ namespace TOJAM2018.Gameplay
             }
         }
 
+        /// <summary>
+        /// When this is fired, it checks incoming collider type. If bullet, decrease health.
+        /// If building health reaches critical limit, it will fire shattering callbacks.
+        /// </summary>
+        /// <param name="collision"> Computed collision. </param>
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.collider.gameObject.layer == bulletLayer)
@@ -57,9 +66,10 @@ namespace TOJAM2018.Gameplay
                     ShipBullet shipBullet = collision.collider.GetComponentInParent<ShipBullet>();
                     if (shipBullet)
                     {
-                        if (shipBullet.shatterBuildingEvent != null)
+                        if (shipBullet.OnBuildingShatter != null)
                         {
-                            shipBullet.shatterBuildingEvent(IsTargetBuilding ? maxPowerGain.Value : powerGain.Value);
+                            // invoke bullet shatter callback based on power reward
+                            shipBullet.OnBuildingShatter(IsTargetBuilding ? maxPowerGain.Value : powerGain.Value);
                         }
                     }
 
@@ -68,13 +78,17 @@ namespace TOJAM2018.Gameplay
             }
         }
 
+        /// <summary>
+        /// Method called when this builing health reaches critical health. Instatiates shattered gameobject.
+        /// Invokes shattered event.
+        /// </summary>
         private void Shatter()
         {
             GameObject.Instantiate(shatterPrefab, BuildingTransform.position, BuildingTransform.rotation);
 
-            if (buildingDestroyedEvent != null)
+            if (OnBuildingDestroyed != null)
             {
-                buildingDestroyedEvent(this);
+                OnBuildingDestroyed(this);
             }
 
             Destroy(gameObject);

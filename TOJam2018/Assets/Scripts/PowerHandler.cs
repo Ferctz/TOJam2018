@@ -3,6 +3,10 @@ using ScriptableObjects;
 
 namespace TOJAM2018.Gameplay
 {
+    /// <summary>
+    /// Class that ticks down a player power amount. Invokes a player death event
+    /// and this handles any power additions.
+    /// </summary>
     public class PowerHandler : MonoBehaviour
     {
         public BoolVariable isGameRunning;
@@ -18,6 +22,9 @@ namespace TOJAM2018.Gameplay
             playerPower.Value = playerMaxPower.Value;
         }
 
+        /// <summary>
+        /// Ticks down player power. If power below 0, player death event invoked.
+        /// </summary>
         private void Update()
         {
             if (!isGameRunning.Value)
@@ -36,6 +43,10 @@ namespace TOJAM2018.Gameplay
             }
         }
 
+        /// <summary>
+        /// Adds powerToAdd amount to player current power, ensuring it is clamped within player max power.
+        /// </summary>
+        /// <param name="powerToAdd"></param>
         public void AddPower(float powerToAdd)
         {
             playerPower.Value += powerToAdd;

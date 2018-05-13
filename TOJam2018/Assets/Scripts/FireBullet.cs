@@ -6,8 +6,12 @@ using ScriptableObjects;
 namespace TOJAM2018.Gameplay
 {
     [System.Serializable]
-    public class BulletDestroyBuildingCallback : UnityEvent<float> { }
+    public class BulletDestroyBuildingEventHandler : UnityEvent<float> { }
 
+    /// <summary>
+    /// Class that handles pooling/instantiation/firing of ShipBullets. Also Fires an event 
+    /// when a ShipBullet successfully destroys a building.
+    /// </summary>
     public class FireBullet : MonoBehaviour
     {
         public BoolVariable isGameRunning;
@@ -20,7 +24,7 @@ namespace TOJAM2018.Gameplay
         public Queue<ShipBullet> bulletQueue;
         private const int INITIAL_BULLET_POOL = 10;
 
-        public BulletDestroyBuildingCallback bulletDestroyBuildingEvent;
+        public BulletDestroyBuildingEventHandler OnBulletDestroyBuilding;
 
         private void Awake()
         {
@@ -29,17 +33,27 @@ namespace TOJAM2018.Gameplay
             InitQueue();
         }
 
+        /// <summary>
+        /// Populates a queue with INITIAL_BULLET_POOL amount of ShipBullets. 
+        /// </summary>
         private void InitQueue()
         {
             bulletQueue = new Queue<ShipBullet>();
             for (int i = 0; i < INITIAL_BULLET_POOL; i++)
             {
-                ShipBullet pooledBullet = GameObject.Instantiate(bulletPrefab, dynamicTransform.position, Quaternion.identity, dynamicTransform);
+                ShipBullet pooledBullet = GameObject.Instantiate(bulletPrefab, 
+                                                                dynamicTransform.position, 
+                                                                Quaternion.identity, 
+                                                                dynamicTransform);
                 pooledBullet.Sleep();
                 bulletQueue.Enqueue(pooledBullet);
             }
         }
 
+        /// <summary>
+        /// Returns a bullet from bulletQueue if not empty, else instantiates a bullet.
+        /// </summary>
+        /// <returns> Bullet class instance from queue or instantiation. </returns>
         private ShipBullet GetShipBullet()
         {
             if (bulletQueue.Count > 0)
@@ -48,11 +62,16 @@ namespace TOJAM2018.Gameplay
             }
             else
             {
-                ShipBullet pooledBullet = GameObject.Instantiate(bulletPrefab, dynamicTransform.position, Quaternion.identity);
+                ShipBullet pooledBullet = GameObject.Instantiate(bulletPrefab, 
+                                                                dynamicTransform.position, 
+                                                                Quaternion.identity);
                 return pooledBullet;
             }
         }
 
+        /// <summary>
+        /// Public method to fire a bullet. Should be linked to a GameEventListener listening for an input event;
+        /// </summary>
         public void FireShipBullet()
         {
             if (!isGameRunning.Value)
@@ -63,25 +82,31 @@ namespace TOJAM2018.Gameplay
             ShipBullet bullet = GetShipBullet();
             bullet.transform.position = Transform.position + (Transform.forward * 8f);
             bullet.transform.forward = Transform.forward;
-            bullet.bulletCollisionEvent -= OnBulletCollision;
-            bullet.bulletCollisionEvent += OnBulletCollision;
-            bullet.shatterBuildingEvent -= OnBuildingShatter;
-            bullet.shatterBuildingEvent += OnBuildingShatter; 
+
+            bullet.OnBulletCollision -= RemoveBullet;
+            bullet.OnBulletCollision += RemoveBullet;
+
+            bullet.OnBuildingShatter -= BuildingShatter;
+            bullet.OnBuildingShatter += BuildingShatter; 
             bullet.Fire();
         }
 
-        private void OnBulletCollision(ShipBullet shipBullet)
+        /// <summary>
+        /// Remove a bullet from bulletQueue.
+        /// </summary>
+        /// <param name="shipBullet"> Bullet to remove. </param>
+        private void RemoveBullet(ShipBullet shipBullet)
         {
             bulletQueue.Enqueue(shipBullet);
-            shipBullet.bulletCollisionEvent -= OnBulletCollision;
+            shipBullet.OnBulletCollision -= RemoveBullet;
         }
 
         /// <summary>
-        /// Receive the message from the bullet that a building has been shattered, invoke this public event
+        /// Receive the message from the bullet that a building has been shattered, invoke this public event.
         /// </summary>
-        private void OnBuildingShatter(float powerGained)
+        private void BuildingShatter(float powerGained)
         {
-            bulletDestroyBuildingEvent.Invoke(powerGained);
+            OnBulletDestroyBuilding.Invoke(powerGained);
         }
     }
 }

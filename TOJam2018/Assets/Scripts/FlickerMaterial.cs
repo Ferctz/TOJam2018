@@ -3,19 +3,26 @@ using UnityEngine;
 
 namespace TOJAM2018.Gameplay
 {
+    /// <summary>
+    /// Class that can flicker all materials on a renderer red, and back.
+    /// </summary>
     public class FlickerMaterial : MonoBehaviour
     {
         public MeshRenderer meshRenderer;
 
+        /// <summary>
+        /// Called externally to start flickering this renderer's materials.
+        /// </summary>
         public void StartFlicker()
         {
-            /*for (int i = 0; i < meshRenderer.materials.Length; i++)
-            {
-                meshRenderer.materials[i].color = Color.red;
-            }*/
             StartCoroutine(FlickerRed());
         }
 
+        /// <summary>
+        /// IEnumerator that flickers all materials on this renderer red, and back
+        /// in varying intervals
+        /// </summary>
+        /// <returns></returns>
         IEnumerator FlickerRed()
         {
             Color[] originalColors = new Color[meshRenderer.materials.Length];

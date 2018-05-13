@@ -2,6 +2,10 @@
 
 namespace TOJAM2018.Gameplay
 {
+    /// <summary>
+    /// Class that follows a transform based on an offset. Movement is done in LateUpdate.
+    /// </summary>
+    [RequireComponent(typeof(Camera))]
     public class FollowPlayer : MonoBehaviour
     {
         [SerializeField]
@@ -16,19 +20,16 @@ namespace TOJAM2018.Gameplay
 
         private Transform Transform;
 
-        private Vector3 calculatedOffset;
-
         private void Awake()
         {
             Transform = transform;
         }
-
+        
+        /// <summary>
+        /// Movement and rotation translations done in LateUpdate to avoid rendering jitter.
+        /// </summary>
         private void LateUpdate()
         {
-            /*calculatedOffset.x = offset.x * followTransform.forward.x;
-            calculatedOffset.y = offset.y * followTransform.forward.y;
-            calculatedOffset.z = offset.z * followTransform.forward.z;*/
-
             if (followTransform == null)
             {
                 return;

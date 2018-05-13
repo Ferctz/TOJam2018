@@ -5,17 +5,19 @@ using TOJAM2018.HUD;
 
 namespace TOJAM2018.Gameplay
 {
+    /// <summary>
+    /// Class that handles loading the game scene, spawns players and associated gameobjects.
+    /// Requires a TerrainData asset. Uses its height to position players.
+    /// </summary>
     public class GameManager : MonoBehaviour
     {
         [Header("Player1")]
         public GameObject player1;
         public FloatVariable player1Power;
-        public BoolVariable player1InvertY;
 
         [Header("Player2")]
         public GameObject player2;
         public FloatVariable player2Power;
-        public BoolVariable player2InvertY;
 
         [Header("Global")]
         public BoolVariable isGameRunning;
@@ -40,6 +42,9 @@ namespace TOJAM2018.Gameplay
             DontDestroyOnLoad(this);
         }
 
+        /// <summary>
+        /// Method that stops game if within Unity. If in standalone it quits application.
+        /// </summary>
         public void QuitGame()
         {
 #if UNITY_EDITOR
@@ -49,12 +54,19 @@ namespace TOJAM2018.Gameplay
 #endif
         }
 
+        /// <summary>
+        /// Method that loads game scene asynchronously.
+        /// </summary>
         public void StartGame()
         {
-            SceneManagement.SceneManager.LoadSceneAsync("Game", UnityEngine.SceneManagement.LoadSceneMode.Single, OnGameSceneLoaded);
+            SceneManagement.SceneManager.LoadSceneAsync("Game", UnityEngine.SceneManagement.LoadSceneMode.Single, GameSceneLoaded);
         }
 
-        private void OnGameSceneLoaded()
+        /// <summary>
+        /// Method that handles instantiation of players once the game scene loads. Inits things like
+        /// player canvases, cameras, 
+        /// </summary>
+        private void GameSceneLoaded()
         {
             // start game
             isGameRunning.Value = true;
@@ -72,12 +84,15 @@ namespace TOJAM2018.Gameplay
 
             // init player 1 canvas
             PlayerCanvas player1Canvas = Instantiate(playerHUDCanvas);
-            player1Canvas.Init(player1UICamera, player1Power, playerMaxPower, player1InvertY);
+            player1Canvas.Init(player1UICamera, player1Power, playerMaxPower);
+            player1Canvas.gameObject.name = "Player1Canvas";
 
             // position player 1 above the terrain
             player1Clone.transform.position = new Vector3(Mathf.Lerp(gameTerrainData.bounds.min.x, gameTerrainData.bounds.max.x, (float)rand.NextDouble()),
                                                             0f,
                                                             Mathf.Lerp(gameTerrainData.bounds.min.z, gameTerrainData.bounds.max.z, (float)rand.NextDouble()));
+
+            // raycast down to make sure player one is always 50 units above the terrain
             ray.origin = new Vector3(player1Clone.transform.position.x, 1000f, player1Clone.transform.position.z);
             ray.direction = Vector3.down;
             if (Physics.Raycast(ray, out hit, 1001f, terrainLayer))
@@ -87,6 +102,7 @@ namespace TOJAM2018.Gameplay
 
             if (playerCount.Value > 1)
             {
+                // set player 1 rect to be half height
                 Rect player1Rect = new Rect(new Vector2(0f, 0.5f), new Vector2(1f, 0.5f));
                 player1Camera.rect = player1Rect;
                 player1UICamera.rect = player1Rect;
@@ -106,8 +122,10 @@ namespace TOJAM2018.Gameplay
 
                 // init player 2 canvas
                 PlayerCanvas player2Canvas = Instantiate(playerHUDCanvas);
-                player2Canvas.Init(player2UICamera, player2Power, playerMaxPower, player2InvertY);
+                player2Canvas.Init(player2UICamera, player2Power, playerMaxPower);
+                player2Canvas.gameObject.name = "Player2Canvas";
 
+                // set player 1 rect half height
                 Rect player2Rect = new Rect(Vector2.zero, new Vector2(1f, 0.5f));
                 player2Camera.rect = player2Rect;
                 player2UICamera.rect = player2Rect;
@@ -119,6 +137,9 @@ namespace TOJAM2018.Gameplay
             }
         }
 
+        /// <summary>
+        /// Ends the current game session.
+        /// </summary>
         public void EndGame()
         {
             isGameRunning.Value = false;

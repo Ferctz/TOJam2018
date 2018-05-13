@@ -4,6 +4,9 @@ using ScriptableObjects;
 
 namespace TOJAM2018.HUD
 {
+    /// <summary>
+    /// Handles initializing a player canvas based on power values and player count.
+    /// </summary>
     [RequireComponent(typeof(Canvas))]
     public class PlayerCanvas : MonoBehaviour
     {
@@ -20,9 +23,17 @@ namespace TOJAM2018.HUD
         public Text fireText;
         public Text boostText;
 
-        public void Init(Camera playerCamera, FloatVariable currentPower, FloatVariable maxPower, BoolVariable invertY)
+        /// <summary>
+        /// Method to initialize components in this canvas.
+        /// </summary>
+        /// <param name="playerCamera"> Render camera. </param>
+        /// <param name="currentPower"> Player current power. </param>
+        /// <param name="maxPower"> Player max power. </param>
+        public void Init(Camera playerCamera, FloatVariable currentPower, FloatVariable maxPower)
         {
             Canvas.worldCamera = playerCamera;
+
+            // init power slider based on current/max power values
             sliderPowerTracker.Init(currentPower, maxPower);
 
             if (playerCount.Value == 1) // if solo
@@ -35,6 +46,9 @@ namespace TOJAM2018.HUD
             gameEndText.SetActive(false);
         }
 
+        /// <summary>
+        /// Sets active a text canvas component.
+        /// </summary>
         public void ShowGameEndScreen()
         {
             gameEndText.SetActive(true);

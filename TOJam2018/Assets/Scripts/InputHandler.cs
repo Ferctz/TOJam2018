@@ -3,6 +3,13 @@ using ScriptableObjects;
 
 namespace TOJAM2018.InputHandling
 {
+    /// <summary>
+    /// Only this class is designed to poll for key/mouse/controller input.
+    /// Stores values in scriptable object containers.
+    /// Mapping with Windows Xbox mapping in mind.
+    /// Setup: inside Unity, per player create a horizontal and vertical axis.
+    /// Make sure type is Joystick Axis, Axis is per axis and Joy Num the joystick number.
+    /// </summary>
     public class InputHandler : MonoBehaviour
     {
         public GameEvent escEvent;
@@ -29,20 +36,24 @@ namespace TOJAM2018.InputHandling
             DontDestroyOnLoad(this);
         }
 
+        /// <summary>
+        /// Polling for player input for solo mode with keyboard/controller or 
+        /// multiplayer mode with two players using controllers.
+        /// </summary>
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape)) // escape button press
             {
                 escEvent.Raise();
             }
 
-            if (Input.GetKeyDown("joystick button 7")) // start button
+            if (Input.GetKeyDown("joystick button 7")) // start button press
             {
                 playerCount.Value = 1;
                 gameStartEvent.Raise();
             }
 
-            if (Input.GetKeyDown("joystick button 6")) // select button
+            if (Input.GetKeyDown("joystick button 6")) // select button press
             {
                 playerCount.Value = 2;
                 gameStartEvent.Raise();
@@ -50,76 +61,65 @@ namespace TOJAM2018.InputHandling
 
             #region PlayerOneInput
 
-            if (playerCount.Value == 1)
+            if (playerCount.Value == 1) // solo mode supports keyboard input
             {
+                // horizontal/vertical axis input
                 player1Horizontal.Value = Input.GetAxis("Horizontal");
                 player1Vertical.Value = Input.GetAxis("Vertical");
+
+                if (Input.GetKeyDown(KeyCode.Space) || // space key press
+                    Input.GetKeyDown("joystick 1 button 0")) // a button press
+                {
+                    player1Fire1Event.Raise();
+                }
+
+                if (Input.GetKeyDown(KeyCode.Y) || // y key press
+                    Input.GetKeyDown("joystick 1 button 3")) // y button press
+                {
+                    player1InvertYEvent.Raise();
+                }
+
+                player1Boost.Value = Input.GetKey(KeyCode.LeftShift) || // left shift press
+                                        Input.GetKey("joystick 1 button 5"); // right bumper press
             }
-            else
+            else // multiplayer mode only accepts xbox controller input
             {
+                // player 2 horizontal/vertical axis input
                 player1Horizontal.Value = Input.GetAxis("Horizontal1");
                 player1Vertical.Value = Input.GetAxis("Vertical1");
-            }
 
-            if (playerCount.Value == 1)
-            {
-                if (Input.GetKeyDown(KeyCode.Space) ||
-                    Input.GetKeyDown("joystick 1 button 0"))
+                if (Input.GetKeyDown("joystick 1 button 0")) // player 1 a button press
                 {
                     player1Fire1Event.Raise();
                 }
-            }
-            else
-            {
-                if (Input.GetKeyDown("joystick 1 button 0"))
-                {
-                    player1Fire1Event.Raise();
-                }
-            }
 
-            if (playerCount.Value == 1)
-            {
-                if (Input.GetKeyDown(KeyCode.Y) || Input.GetKeyDown("joystick 1 button 3"))
+                if (Input.GetKeyDown("joystick 1 button 3")) // player 1 y button press
                 {
                     player1InvertYEvent.Raise();
                 }
-            }
-            else
-            {
-                if (Input.GetKeyDown("joystick 1 button 3"))
-                {
-                    player1InvertYEvent.Raise();
-                }
-            }
-            
-            if (playerCount.Value == 1)
-            {
-                player1Boost.Value = Input.GetKey(KeyCode.LeftShift) || Input.GetKey("joystick 1 button 5");
-            }
-            else
-            {
-                player1Boost.Value = Input.GetKey("joystick 1 button 5");
-            }            
+
+                player1Boost.Value = Input.GetKey("joystick 1 button 5"); // player 1 right bumper press
+            }       
 
             #endregion
 
             #region PlayerTwoInput
 
+            // player 2 horizontal/vertical axis input
             player2Horizontal.Value = Input.GetAxis("Horizontal2");
             player2Vertical.Value = Input.GetAxis("Vertical2");
 
-            if (Input.GetKeyDown(KeyCode.RightShift) ||
-                Input.GetKeyDown("joystick 2 button 0"))
+            if (Input.GetKeyDown("joystick 2 button 0")) // player 2 a button press
             {
                 player2Fire1Event.Raise();
             }
 
-            if (Input.GetKeyDown("joystick 2 button 3"))
+            if (Input.GetKeyDown("joystick 2 button 3")) // player 2 y button press
             {
                 player2InvertYEvent.Raise();
             }
 
-            player2Boost.Value = Input.GetKey("joystick 2 button 5");
+            player2Boost.Value = Input.GetKey("joystick 2 button 5"); // player 2 right bumper press
 
             #endregion
         }

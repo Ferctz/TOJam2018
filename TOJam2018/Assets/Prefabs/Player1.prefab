@@ -250,7 +250,7 @@ MonoBehaviour:
   isGameRunning: {fileID: 11400000, guid: e823f385a2636554bb427b7a6f4eeecb, type: 2}
   bulletPrefab: {fileID: 114409433556396438, guid: ee70a8db878355243a908e31017c7fcf,
     type: 2}
-  bulletDestroyBuildingEvent:
+  OnBulletDestroyBuilding:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114384893242888306}
@@ -264,7 +264,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: TOJAM2018.Gameplay.BulletDestroyBuildingCallback, Assembly-CSharp,
+    m_TypeName: TOJAM2018.Gameplay.BulletDestroyBuildingEventHandler, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &114953235425465904
 MonoBehaviour:

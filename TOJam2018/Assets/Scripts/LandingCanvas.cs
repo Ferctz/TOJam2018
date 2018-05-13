@@ -3,6 +3,10 @@ using ScriptableObjects;
 
 namespace TOJAM2018.Menu
 {
+    /// <summary>
+    /// Method that handles input from landing scene. It sets player count
+    /// and invokes game start event.
+    /// </summary>
     public class LandingCanvas : MonoBehaviour
     {
         public IntVariable playerCount;

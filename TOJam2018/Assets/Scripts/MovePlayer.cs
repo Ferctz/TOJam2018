@@ -3,6 +3,9 @@ using ScriptableObjects;
 
 namespace TOJAM2018.Gameplay
 {
+    /// <summary>
+    /// Class that applies forward/rotation forces on this attached rigidbody.
+    /// </summary>
     [RequireComponent(typeof(Rigidbody))]
     public class MovePlayer : MonoBehaviour
     {
@@ -34,6 +37,9 @@ namespace TOJAM2018.Gameplay
             playerTransform = transform;
         }
 
+        /// <summary>
+        /// Handles thrust multiplier based on boost input.
+        /// </summary>
         private void Update()
         {
             if (!isGameRunning.Value)
@@ -53,6 +59,9 @@ namespace TOJAM2018.Gameplay
             thrustMultiplier = Mathf.Clamp(thrustMultiplier, 1f, MAX_THRUST_MULTIPLIER);
         }
 
+        /// <summary>
+        /// Physics forward/rotation forces done in FixedUpdate.
+        /// </summary>
         private void FixedUpdate()
         {
             if (!isGameRunning.Value)
@@ -60,11 +69,13 @@ namespace TOJAM2018.Gameplay
                 return;
             }
 
+            // apply raw torque based on player input
             playerRigidbody.AddForce(playerTransform.forward * (forwardForce.Value * thrustMultiplier));
             torque.x = 0f + (invertY.Value ? vertical.Value : -vertical.Value);
             torque.y = 0f + horizontal.Value;
             playerRigidbody.AddRelativeTorque(torque * torqueForce.Value);
 
+            // apply corrective torque which levels this transform in z rotation
             Quaternion softRot = Quaternion.FromToRotation(playerTransform.up, Vector3.up);
             playerRigidbody.AddTorque(new Vector3(softRot.x, softRot.y, softRot.z) * correctiveTorque.Value);
         }
@@ -74,6 +85,9 @@ namespace TOJAM2018.Gameplay
             invertY.Value = !invertY.Value;
         }
 
+        /// <summary>
+        /// Freeze rigidbody values on player.
+        /// </summary>
         public void FreezePlayer()
         {
             playerRigidbody.isKinematic = true;

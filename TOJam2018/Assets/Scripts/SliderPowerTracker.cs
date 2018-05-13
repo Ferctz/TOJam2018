@@ -4,6 +4,9 @@ using ScriptableObjects;
 
 namespace TOJAM2018.HUD
 {
+    /// <summary>
+    /// Class that tracks a power value. It is initialized based on a max value.
+    /// </summary>
     public class SliderPowerTracker : MonoBehaviour
     {
         public Slider powerSlider;
