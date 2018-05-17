@@ -10,9 +10,7 @@ namespace TOJAM2018.Gameplay
     public class MovePlayer : MonoBehaviour
     {
         public BoolVariable isGameRunning;
-
-        private Transform playerTransform;
-
+        
         public FloatVariable horizontal;
         public FloatVariable vertical;
 
@@ -22,12 +20,12 @@ namespace TOJAM2018.Gameplay
 
         public FloatVariable forwardForce;
         public FloatVariable torqueForce;
-
         public FloatVariable correctiveTorque;
 
-        private Vector3 torque = Vector3.zero;
-
+        private Transform playerTransform;
         public Rigidbody playerRigidbody;
+
+        private Vector3 torque = Vector3.zero;
 
         private float thrustMultiplier = 1f;
         private const float MAX_THRUST_MULTIPLIER = 40f;
@@ -42,7 +40,7 @@ namespace TOJAM2018.Gameplay
         /// </summary>
         private void Update()
         {
-            if (!isGameRunning.Value)
+            if (!isGameRunning.Value || !boost)
             {
                 return;
             }
@@ -64,7 +62,10 @@ namespace TOJAM2018.Gameplay
         /// </summary>
         private void FixedUpdate()
         {
-            if (!isGameRunning.Value)
+            if (!isGameRunning || !isGameRunning.Value ||
+                !horizontal || !vertical || !invertY || !boost ||
+                !forwardForce || !torqueForce || !correctiveTorque ||
+                !playerRigidbody)
             {
                 return;
             }
@@ -82,7 +83,10 @@ namespace TOJAM2018.Gameplay
 
         public void ToggleInvertY()
         {
-            invertY.Value = !invertY.Value;
+            if (invertY)
+            {
+                invertY.Value = !invertY.Value;
+            }
         }
 
         /// <summary>
@@ -90,6 +94,11 @@ namespace TOJAM2018.Gameplay
         /// </summary>
         public void FreezePlayer()
         {
+            if (!playerRigidbody)
+            {
+                return;
+            }
+
             playerRigidbody.isKinematic = true;
             playerRigidbody.velocity = Vector3.zero;
             playerRigidbody.angularVelocity = Vector3.zero;

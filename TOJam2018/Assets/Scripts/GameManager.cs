@@ -68,6 +68,16 @@ namespace TOJAM2018.Gameplay
         /// </summary>
         private void GameSceneLoaded()
         {
+            if (!player1 || !player1Power || !player2 || !player2Power ||
+                !isGameRunning || !playerCount || !playerPowerCost || !playerMaxPower ||
+                !playerCamera || !playerUICamera || !playerHUDCanvas ||
+                !gameTerrainData
+                )
+            {
+                Debug.Log("GameManager variables not set.", this);
+                return;
+            }
+
             // start game
             isGameRunning.Value = true;
 
@@ -142,6 +152,10 @@ namespace TOJAM2018.Gameplay
         /// </summary>
         public void EndGame()
         {
+            if (!isGameRunning)
+            {
+                return;
+            }
             isGameRunning.Value = false;
         }
     }

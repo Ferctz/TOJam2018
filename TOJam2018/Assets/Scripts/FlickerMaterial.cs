@@ -25,6 +25,11 @@ namespace TOJAM2018.Gameplay
         /// <returns></returns>
         IEnumerator FlickerRed()
         {
+            if (!meshRenderer)
+            {
+                yield break;
+            }
+
             Color[] originalColors = new Color[meshRenderer.materials.Length];
             for (int i = 0; i < meshRenderer.materials.Length; i++)
             {

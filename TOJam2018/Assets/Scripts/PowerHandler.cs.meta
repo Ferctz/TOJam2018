@@ -3,7 +3,12 @@ guid: ccc24a2d8f0295044a4148cd868af6c0
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - isGameRunning: {fileID: 11400000, guid: e823f385a2636554bb427b7a6f4eeecb, type: 2}
+  - powerCost: {fileID: 11400000, guid: 404b8edf4c400c643a814278798b7665, type: 2}
+  - playerPower: {instanceID: 0}
+  - playerMaxPower: {instanceID: 0}
+  - playerDeathEvent: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -1,11 +1,18 @@
 fileFormatVersion: 2
 guid: 6a91a519c2b04f54c98820401e3cb50b
-timeCreated: 1524946752
-licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - isGameRunning: {fileID: 11400000, guid: e823f385a2636554bb427b7a6f4eeecb, type: 2}
+  - horizontal: {instanceID: 0}
+  - vertical: {instanceID: 0}
+  - invertY: {instanceID: 0}
+  - boost: {instanceID: 0}
+  - forwardForce: {fileID: 11400000, guid: 5868a374555329649be5a88022f686e8, type: 2}
+  - torqueForce: {fileID: 11400000, guid: 3c73c77d8210e544a8524b7b4a4b6e1d, type: 2}
+  - correctiveTorque: {fileID: 11400000, guid: afd23d0e96c7d7d4a81c806944601aad, type: 2}
+  - playerRigidbody: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

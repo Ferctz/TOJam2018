@@ -58,6 +58,11 @@ namespace TOJAM2018.Gameplay
         /// <param name="collision"> Computed collision. </param>
         private void OnCollisionEnter(Collision collision)
         {
+            if (!hitsUntilShatter || !powerGain || !maxPowerGain)
+            {
+                return;
+            }
+
             if (collision.collider.gameObject.layer == bulletLayer)
             {
                 hits++;
@@ -84,11 +89,16 @@ namespace TOJAM2018.Gameplay
         /// </summary>
         private void Shatter()
         {
+            if (!shatterPrefab)
+            {
+                return;
+            }
+
             GameObject.Instantiate(shatterPrefab, BuildingTransform.position, BuildingTransform.rotation);
 
             if (OnBuildingDestroyed != null)
             {
-                OnBuildingDestroyed(this);
+                OnBuildingDestroyed.Invoke(this);
             }
 
             Destroy(gameObject);

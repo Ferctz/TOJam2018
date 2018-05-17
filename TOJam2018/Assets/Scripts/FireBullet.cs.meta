@@ -3,7 +3,10 @@ guid: 2e1a3a48fb375d6469dc835bdf612227
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - isGameRunning: {fileID: 11400000, guid: e823f385a2636554bb427b7a6f4eeecb, type: 2}
+  - bulletPrefab: {fileID: 114409433556396438, guid: ee70a8db878355243a908e31017c7fcf,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

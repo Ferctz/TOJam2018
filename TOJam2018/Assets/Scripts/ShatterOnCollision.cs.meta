@@ -3,7 +3,14 @@ guid: 0ae638b8ebb22bf4a98791223d3adf70
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - shatterableRuntimeSet: {fileID: 11400000, guid: 23778c4ba15c0924a82c52688da8745f,
+      type: 2}
+  - powerGain: {fileID: 11400000, guid: 71e66da5fb65f9242be501b8490bd6ad, type: 2}
+  - maxPowerGain: {fileID: 11400000, guid: 64d27ae367d5a71449d9b2a5c187f8d0, type: 2}
+  - shatterPrefab: {fileID: 1232548467291890, guid: 4991e658f47c0ec49a852c5bad43e0b4,
+      type: 2}
+  - hitsUntilShatter: {fileID: 11400000, guid: c15773a07f8629241990c67a3ab5a498, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

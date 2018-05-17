@@ -27,7 +27,8 @@ namespace TOJAM2018.Gameplay
         /// </summary>
         private void Update()
         {
-            if (!isGameRunning.Value)
+            if (!isGameRunning.Value ||
+                !powerCost || !playerPower || !playerMaxPower)
             {
                 return;
             }
@@ -49,6 +50,11 @@ namespace TOJAM2018.Gameplay
         /// <param name="powerToAdd"></param>
         public void AddPower(float powerToAdd)
         {
+            if (!playerPower || !playerMaxPower)
+            {
+                return;
+            }
+
             playerPower.Value += powerToAdd;
             playerPower.Value = Mathf.Clamp(playerPower.Value, 0f, playerMaxPower.Value);
         }

@@ -42,6 +42,16 @@ namespace TOJAM2018.InputHandling
         /// </summary>
         private void Update()
         {
+            if (!escEvent || !playerCount || !gameStartEvent ||
+                !player1Horizontal || !player1Vertical || !player1Fire1Event ||
+                !player1Boost || !player1InvertYEvent ||
+                !player2Horizontal || !player2Vertical || !player2Fire1Event ||
+                !player2Boost || !player2InvertYEvent)
+            {
+                Debug.Log("InputHandler variables not set.", this);
+                return;
+            }
+
             if (Input.GetKeyDown(KeyCode.Escape)) // escape button press
             {
                 escEvent.Raise();

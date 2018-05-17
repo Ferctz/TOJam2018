@@ -13,10 +13,15 @@ namespace TOJAM2018.HUD
         public FloatVariable maxPower;
         public FloatVariable currentPower;
 
-        public void Init(FloatVariable currentPower, FloatVariable maxPower)
+        public void Init(FloatVariable playerCurrentPower, FloatVariable playerMaxPower)
         {
-            this.currentPower = currentPower;
-            this.maxPower = maxPower;
+            if (!powerSlider)
+            {
+                return;
+            }
+
+            currentPower = playerCurrentPower;
+            maxPower = playerMaxPower;
 
             powerSlider.value = maxPower.Value;
             powerSlider.maxValue = maxPower.Value;
@@ -24,7 +29,7 @@ namespace TOJAM2018.HUD
 
         private void Update()
         {
-            if (powerSlider == null || currentPower == null || maxPower == null)
+            if (powerSlider == null || currentPower == null)
             {
                 return;
             }

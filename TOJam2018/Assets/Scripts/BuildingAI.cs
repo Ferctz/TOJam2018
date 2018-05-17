@@ -66,7 +66,7 @@ namespace TOJAM2018.Gameplay
         /// </summary>
         private void SetBuildingTarget()
         {
-            if (shatterableRuntimeSet == null)
+            if (!shatterableRuntimeSet || !playerRuntimeSet)
             {
                 return;
             }
@@ -125,6 +125,11 @@ namespace TOJAM2018.Gameplay
         /// <param name="buildingDestroyed"></param>
         private void BuildingDestroyed(ShatterOnCollision buildingDestroyed)
         {
+            if (!shatterableRuntimeSet)
+            {
+                return;
+            }
+
             // remove destroyed building manually from runtime set
             shatterableRuntimeSet.Items.Remove(buildingDestroyed);
             if (currentTarget == buildingDestroyed)

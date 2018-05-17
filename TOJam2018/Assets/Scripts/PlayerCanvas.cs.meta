@@ -3,7 +3,13 @@ guid: 43fc7eb2d42b87c42a6ac3b703797cf2
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - sliderPowerTracker: {instanceID: 0}
+  - gameEndText: {instanceID: 0}
+  - playerCount: {fileID: 11400000, guid: 0bb2dc970f0c18944aeb60892c81287b, type: 2}
+  - moveText: {instanceID: 0}
+  - fireText: {instanceID: 0}
+  - boostText: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

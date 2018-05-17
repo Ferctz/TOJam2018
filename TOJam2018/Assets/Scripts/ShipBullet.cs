@@ -35,6 +35,10 @@ namespace TOJAM2018.Gameplay
 
         private void FixedUpdate()
         {
+            if (!bulletRigidbody || !bulletForce)
+            {
+                return;
+            }
             bulletRigidbody.AddForce(Transform.forward * bulletForce.Value, ForceMode.Force);
         }
 
@@ -43,6 +47,11 @@ namespace TOJAM2018.Gameplay
         /// </summary>
         public void Fire()
         {
+            if (!bulletRigidbody || !bulletMesh || !bulletImpulseForce)
+            {
+                return;
+            }
+
             bulletRigidbody.velocity = Vector3.zero;
             bulletRigidbody.angularVelocity = Vector3.zero;
 
@@ -57,6 +66,11 @@ namespace TOJAM2018.Gameplay
         /// </summary>
         public void Sleep()
         {
+            if (!bulletRigidbody || !bulletMesh)
+            {
+                return;
+            }
+
             bulletRigidbody.velocity = Vector3.zero;
             bulletRigidbody.angularVelocity = Vector3.zero;
 

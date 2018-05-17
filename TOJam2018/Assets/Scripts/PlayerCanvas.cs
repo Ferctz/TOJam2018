@@ -31,6 +31,13 @@ namespace TOJAM2018.HUD
         /// <param name="maxPower"> Player max power. </param>
         public void Init(Camera playerCamera, FloatVariable currentPower, FloatVariable maxPower)
         {
+            if (!sliderPowerTracker || !gameEndText || !playerCount ||
+                !moveText || !fireText || !boostText)
+            {
+                Debug.Log("PlayerCanvas variables not set.", this);
+                return;
+            }
+
             Canvas.worldCamera = playerCamera;
 
             // init power slider based on current/max power values
@@ -51,7 +58,10 @@ namespace TOJAM2018.HUD
         /// </summary>
         public void ShowGameEndScreen()
         {
-            gameEndText.SetActive(true);
+            if (gameEndText)
+            {
+                gameEndText.SetActive(true);
+            }
         }
     }
 }

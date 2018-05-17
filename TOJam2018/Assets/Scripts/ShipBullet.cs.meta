@@ -3,7 +3,12 @@ guid: f1dcc77a670106b42ad74c45de09fb50
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - bulletRigidbody: {instanceID: 0}
+  - bulletMesh: {instanceID: 0}
+  - bulletForce: {fileID: 11400000, guid: c3906c2fec819ba4ca9a7eea82f28e39, type: 2}
+  - bulletImpulseForce: {fileID: 11400000, guid: d77e0c05dd6173446bf7abaf9f7f5adb,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

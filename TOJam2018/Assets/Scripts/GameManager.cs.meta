@@ -3,7 +3,22 @@ guid: 4d262e23b457a4a41bd8585df98c40f4
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player1: {fileID: 1479382501374688, guid: 709a7560235ffec4abece7669f2c936f, type: 2}
+  - player1Power: {fileID: 11400000, guid: 1938efcd91cfc9147ab91d35cc50dd92, type: 2}
+  - player2: {fileID: 1127634201557108, guid: 11df239b119369d40994c7b3af67a390, type: 2}
+  - player2Power: {fileID: 11400000, guid: 050ad5abad807a443891bce251a8670f, type: 2}
+  - isGameRunning: {fileID: 11400000, guid: e823f385a2636554bb427b7a6f4eeecb, type: 2}
+  - playerCount: {fileID: 11400000, guid: 0bb2dc970f0c18944aeb60892c81287b, type: 2}
+  - playerPowerCost: {fileID: 11400000, guid: 404b8edf4c400c643a814278798b7665, type: 2}
+  - playerMaxPower: {fileID: 11400000, guid: 9d2dedaa230070141bc7c9837a356e54, type: 2}
+  - playerCamera: {fileID: 20288420382818964, guid: 9aff8c1c3edc4344b8544305f8d26a9e,
+      type: 2}
+  - playerUICamera: {fileID: 20288420382818964, guid: 14990d489d4ea6e428454e4f73387041,
+      type: 2}
+  - playerHUDCanvas: {fileID: 114042627173730388, guid: df3f1873a39c87f4f846f71c50c0779a,
+      type: 2}
+  - gameTerrainData: {fileID: 15600000, guid: 2e865b0fbbd4c2745aed9642f8126fe5, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

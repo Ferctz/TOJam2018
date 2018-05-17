@@ -29,7 +29,11 @@ namespace TOJAM2018.Gameplay
         private void Awake()
         {
             Transform = transform;
-            dynamicTransform = GameObject.Find("Dynamic").transform;
+            GameObject dynamicParent = GameObject.Find("Dynamic");
+            if (dynamicParent)
+            {
+                dynamicTransform = dynamicParent.transform;
+            }
             InitQueue();
         }
 
@@ -38,6 +42,11 @@ namespace TOJAM2018.Gameplay
         /// </summary>
         private void InitQueue()
         {
+            if (!bulletPrefab || !dynamicTransform)
+            {
+                return;
+            }
+
             bulletQueue = new Queue<ShipBullet>();
             for (int i = 0; i < INITIAL_BULLET_POOL; i++)
             {
@@ -56,6 +65,11 @@ namespace TOJAM2018.Gameplay
         /// <returns> Bullet class instance from queue or instantiation. </returns>
         private ShipBullet GetShipBullet()
         {
+            if (bulletQueue == null || !bulletPrefab || !dynamicTransform)
+            {
+                return null;
+            }
+
             if (bulletQueue.Count > 0)
             {
                 return bulletQueue.Dequeue();
@@ -80,6 +94,10 @@ namespace TOJAM2018.Gameplay
             }
 
             ShipBullet bullet = GetShipBullet();
+            if (!bullet)
+            {
+                return;
+            }
             bullet.transform.position = Transform.position + (Transform.forward * 8f);
             bullet.transform.forward = Transform.forward;
 
@@ -87,7 +105,8 @@ namespace TOJAM2018.Gameplay
             bullet.OnBulletCollision += RemoveBullet;
 
             bullet.OnBuildingShatter -= BuildingShatter;
-            bullet.OnBuildingShatter += BuildingShatter; 
+            bullet.OnBuildingShatter += BuildingShatter;
+
             bullet.Fire();
         }
 
@@ -97,6 +116,11 @@ namespace TOJAM2018.Gameplay
         /// <param name="shipBullet"> Bullet to remove. </param>
         private void RemoveBullet(ShipBullet shipBullet)
         {
+            if (!shipBullet)
+            {
+                return;
+            }
+
             bulletQueue.Enqueue(shipBullet);
             shipBullet.OnBulletCollision -= RemoveBullet;
         }

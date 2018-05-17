@@ -15,19 +15,30 @@ namespace TOJAM2018.Menu
 
         public void SetSinglePlayer()
         {
+            if (!playerCount)
+            {
+                return;
+            }
             playerCount.Value = 1;
             StartGame();
         }
 
         public void SetMultiplayer()
         {
+            if (!playerCount)
+            {
+                return;
+            }
             playerCount.Value = 2;
             StartGame();
         }
 
         private void StartGame()
         {
-            gameStartEvent.Raise();
+            if (gameStartEvent)
+            {
+                gameStartEvent.Raise();
+            }
         }
     }
 }
